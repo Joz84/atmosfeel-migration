@@ -1,0 +1,5 @@
+li.list-group-item.clearfix
+  = collaboration_type.label
+  .btn-group.pull-right
+    = link_to 'Éditer', edit_back_collaboration_type_path(collaboration_type), class: 'btn btn-primary'
+    = link_to 'Supprimer', back_collaboration_type_path(collaboration_type), class: 'btn btn-danger', data: {:confirm => 'Are you sure?'}, :method => :delete

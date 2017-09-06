@@ -1,0 +1,93 @@
+.circle {
+  width: 120px;
+  height: 120px;
+  line-height: 120px;
+  border-radius: 120px;
+  background: rgba($pelorous, 0.3);
+  color: $pelorous;
+  text-align: center;
+  font-size: 24px;
+  &.circle-green {
+    background: rgba($sycamore, 0.3);
+    color:$sycamore;
+  }
+
+  &.circle-purple {
+    background: rgba($woodybrown, 0.3);
+    color:$woodybrown;
+  }
+  &.circle-yellow {
+    background: rgba($mongoose, 0.3);
+    color:$mongoose;
+  }
+  &.circle-pink {
+    background: rgba($pink, 0.3);
+    color:$pink;
+  }
+}
+
+
+.tarifs {
+  margin-top: 50px;
+  .tarif {
+    background: white;
+    &.tarif-black, &.tarif-black small {
+      color: $woodybrown;
+      .tarif-price {
+        background: rgba($woodybrown, 0.2);
+        border-top: 4px solid $woodybrown;
+      }
+    }
+    &.tarif-pink, &.tarif-pink small {
+      color: $pink;
+      .tarif-price {
+        background: rgba($pink, 0.2);
+        border-top: 4px solid $pink;
+      }
+    }
+
+    &.tarif-yellow, &.tarif-yellow small {
+      color: $wattle;
+      .tarif-price {
+        background: rgba($wattle, 0.2);
+        border-top: 4px solid $wattle;
+      }
+    }
+    .tarif-label {
+      display: block;
+    }
+    .tarif-head {
+      text-align: center;
+      padding: 30px 0;
+      .tarif-title {
+        font-size: 32px;
+        line-height: 70%;
+        small {
+          font-size: 13px;
+          text-transform: uppercase;
+        }
+      }
+      
+    }
+    .tarif-price {
+      @extend .cf;
+      padding: 50px 0;
+      .tarif-price-unit {
+        font-size: 45px;
+        line-height: 80%;
+        margin-right: -14px;
+      }
+      .tarif-price-decimal {
+        font-size: 24px;
+        line-height: 100%;
+        margin-left: -14px;
+      }
+      .tarif-price-time {
+        margin-left: -14px;
+        font-size: 13px;
+      }
+    }
+  }
+
+
+}

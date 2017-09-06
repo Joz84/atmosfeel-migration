@@ -1,0 +1,8 @@
+fr: 
+  id: 1
+  label: Français
+  opuses_count: 2
+en:
+  id: 2
+  label: Anglais
+  opuses_count: 2

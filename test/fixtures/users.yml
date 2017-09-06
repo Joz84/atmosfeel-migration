@@ -1,0 +1,37 @@
+one: 
+  id: 1
+  firstname: John
+  lastname: Foo
+  email: foo@bar.com
+  encrypted_password: <%= Devise.bcrypt(User, 'password') %>
+  phone: 0606060606
+  address: 107 test street - 42 000 AlphaCity
+  artist: 1
+  nickname: Carbone
+  resume: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec blandit magna sit amet lacus sagittis'
+  title: Carbone
+  opuses_count: 3
+two: 
+  id: 2
+  firstname: Bob
+  lastname: Bar
+  email: bar@foo.com
+  encrypted_password: <%= Devise.bcrypt(User, 'password') %>
+  phone: 0606060606
+  address: 107 test street - 42 000 AlphaCity
+  artist: 0
+  title: Bob Bar
+  opuses_count: 1
+three: 
+  id: 3
+  firstname: George
+  lastname: Foo
+  email: george@bar.com
+  encrypted_password: <%= Devise.bcrypt(User, 'password') %>
+  phone: 0606060606
+  address: 107 test street - 42 000 AlphaCity
+  artist: 1
+  nickname: Abitbol
+  resume: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec blandit magna sit amet lacus sagittis'
+  title: Abitbol
+  opuses_count: 0

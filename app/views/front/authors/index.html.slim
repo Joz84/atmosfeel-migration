@@ -1,0 +1,24 @@
+.breadcrumb
+  = front_catalog_link
+  i.icon-caret-right
+  | Les artistes
+
+h1 Les artistes
+
+.opus-sorting.ajax-query-path#authors(data-ajax-path="#{order_front_authors_path}")
+  a href="#" data-order-attr="title" data-order-val="asc"
+    | Nom
+    i.icon-caret-up
+
+  a href="#" data-order-attr="opuses_count" data-order-val="asc"
+    | Nombre d'oeuvres
+    i.icon-caret-up
+
+  a.active href="#" data-order-attr="first_published_opus" data-order-val="desc"
+    | Dernière publication
+    i.icon-caret-down
+
+.row#items
+  = render partial: 'author', collection: @authors, as: :artist
+
+= render partial: 'front/commons/author_contact_form'

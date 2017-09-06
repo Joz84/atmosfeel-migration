@@ -1,0 +1,123 @@
+h1
+  = @opus.title
+hr
+
+- if @opus.atf_experience?
+  - my_opus_path = front_experience_product_path(@opus.id)
+- else
+  - my_opus_path = front_marketplace_product_path(@opus.id)
+
+.row 
+  .col-sm-3
+    img.img-thumbnail src=@opus.cover.url(:show)
+    br
+    br
+    p
+      = link_to "Voir l'oeuvre", read_front_opus_path(@opus, back: true), class: "btn btn-default btn-block prevent-popup"
+      = link_to "Voir l'aperçu", front_preview_product_path(@opus, back: true), class: "btn btn-default btn-block prevent-popup"
+      - if @opus.published
+        = link_to "Mon œuvre sur Atmosfeel", my_opus_path, class: "btn btn-default btn-block"
+
+  .col-sm-9 
+    .panel.panel-default
+      .panel-heading
+        h3.panel-title Résumé 
+      .panel-body
+        - if @opus.abstract.presence
+          = simple_format @opus.abstract 
+        - else
+          span.text-muted Aucun résumé
+
+    h3
+      = "Collaborateurs"
+
+    table.table.table-striped
+      // In case the opus have an author override
+      // We display the author override as the author
+      tr
+        td
+          = @opus.user.title
+        td 
+          - if @opus.author_override? || @opus.author_is_collaborator?
+            | Créateur
+          - else
+            | Auteur
+      - if @opus.author_override?
+        tr
+          td
+            = @opus.author_override
+          td Auteur
+      - for collaboration in @opus.collaborations do
+        tr
+          td 
+            = collaboration.user.title
+          td
+            - if collaboration.collaboration_type 
+              = collaboration.collaboration_type.label
+
+    h3
+      = "Détails"
+
+    table.table.table-striped
+      tr
+        td 
+          b = "Prix"
+        td = number_to_currency @opus.price
+      tr
+        td 
+          b = "Atmosphère"
+        td = @opus.atmosphere.label
+      tr
+        td 
+          b = "Durée de lecture"
+        td  = @opus.play_time.label
+      tr
+        td 
+          b = "Partie(s)"
+        td = @opus.chapters.count
+      tr
+        td 
+          b = "Mots clé(s)"
+        td = @opus.keywords.map(&:label).join(', ')
+      tr
+        td 
+          b = "Langue texte"
+        td = @opus.language.label
+      tr
+        td 
+          b = "Langue voix"
+        td
+          b = @opus.voices.count
+      tr
+        td 
+          b = "Musique"
+        td
+          b = @opus.musics.count
+      tr
+        td 
+          b = "Code oeuvre"
+        td
+          b = @opus.isbn
+
+    - if @opus.user_id == current_user.id
+
+      .pull-left
+        = link_to 'Supprimer', front_opus_path(@opus), class: 'btn btn-danger prevent-popup', data: {:confirm => "Attention, cette action est irréversible.\nÊtes-vous sûr de vouloir supprimer cette oeuvre ?"}, :method => :delete
+
+      .pull-right
+        .btn-group
+          = link_to "Je modifie mon œuvre", edit_front_opus_path(@opus), class: "btn btn-warning prevent-popup"
+        .btn-group
+          = link_to "Je publie mon œuvre !", toggle_publish_front_opus_path, class: "btn #{@opus.published ? 'hidden' : 'btn-success'}", id: 'toggle-publish-link'
+
+#congratulations.modal.fade aria-hidden="true" aria-labelledby="myModalLabel" role="dialog" tabindex="-1" 
+  .modal-dialog
+    .modal-content
+      .modal-header
+        button.close aria-label="Close" data-dismiss="modal" type="button" 
+          span aria-hidden="true"  &times; Fermer
+        h3.modal-title Félicitations ! 
+      .modal-body
+        p Votre oeuvre est désormais publiée sur la plateforme d'autoédition Atmosfeel
+      .modal-footer
+        = link_to "Voir mon œuvre sur Atmosfeel", my_opus_path, class: "btn btn-default btn-block"

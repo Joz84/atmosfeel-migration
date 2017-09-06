@@ -1,0 +1,5 @@
+li.list-group-item.clearfix
+  = language.label
+  .btn-group.pull-right
+    = link_to 'Éditer', edit_back_language_path(language), class: 'btn btn-primary'
+    = link_to 'Supprimer', back_language_path(language), class: 'btn btn-danger', data: {:confirm => 'Are you sure?'}, :method => :delete

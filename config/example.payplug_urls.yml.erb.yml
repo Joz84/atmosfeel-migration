@@ -1,0 +1,12 @@
+test: &default
+  ipn_url: 'http://<%= ENV['LOCAL_HOST'] %>/payplug-ipn'
+  cancel_url: http://<%= ENV['LOCAL_HOST'] %>/payment/cancel
+  return_url: http://<%= ENV['LOCAL_HOST'] %>/payment/confirm
+
+development:
+  <<: *default
+
+production:
+  ipn_url: 'url/payplug-ipn'
+  cancel_url: 'url/payment/cancel'
+  return_url: 'url/payment/confirm'

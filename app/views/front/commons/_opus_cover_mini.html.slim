@@ -1,0 +1,4 @@
+- if opus.cover? || opus.atmosphere.color.nil?
+  img.opus-bg src=opus.cover.url(:mini)
+- else
+  .opus-bg style=atmosphere_bg(opus.atmosphere)

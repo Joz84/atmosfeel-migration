@@ -1,0 +1,5 @@
+li.list-group-item.clearfix
+  = discount_code.denomination
+  .btn-group.pull-right
+    = link_to 'Éditer', edit_back_discount_code_path(discount_code), class: 'btn btn-primary'
+    = link_to 'Supprimer', back_discount_code_path(discount_code), class: 'btn btn-danger', data: {:confirm => 'Are you sure?'}, :method => :delete

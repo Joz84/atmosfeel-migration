@@ -1,0 +1,14 @@
+one:
+  id: 1
+  user_id: 1
+  opus_id: 1
+  content: "The path of the righteous man is beset on all sides by the iniquities of the selfish and the tyranny of evil men. Blessed is he who, in the name of charity and good will, shepherds the weak through the valley of darkness, for he is truly his brother's keeper and the finder of lost children. And I will strike down upon thee with great vengeance and furious anger those who would attempt to poison and destroy My brothers. And you will know My name is the Lord when I lay My vengeance upon thee."
+  created_at: "2015-04-08 12:59:55"
+  updated_at: "2015-04-08 12:59:55"
+two:
+  id: 2
+  user_id: 2
+  opus_id: 1
+  content: "Well, the way they make shows is, they make one show. That show's called a pilot. Then they show that show to the people who make shows, and on the strength of that one show they decide if they're going to make more shows. Some pilots get picked and become television programs. Some don't, become nothing. She starred in one of the ones that became nothing."
+  created_at: "2015-04-08 13:05:36"
+  updated_at: "2015-04-08 13:05:36"

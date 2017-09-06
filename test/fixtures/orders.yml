@@ -1,0 +1,12 @@
+one:
+  id: 1
+  user_id: 1
+  status: validated
+two:
+  id: 2
+  user_id: 2
+  status: pending_validation
+three:
+  id: 37
+  user_id: 1
+  status: pending_validation

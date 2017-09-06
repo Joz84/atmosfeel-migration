@@ -1,0 +1,173 @@
+one:
+  id: 1
+  language_id: 1
+  user_id: 1
+  atmosphere_id: 1
+  play_time_id: 1
+  price: 5.95
+  title: Titre de l'œuvre
+  abstract: |
+    Lorem ipsum dolor sit amet, consectetur adipiscing elit. In auctor tortor vel mattis feugiat. Sed vel tincidunt ligula. Curabitur varius metus quis nibh bibendum semper. Morbi sagittis egestas enim in tempus. Morbi pellentesque, lorem non rhoncus posuere, tortor mauris congue dui, mollis iaculis lorem odio in nisl. 
+  font_color: '#FFFFFF'
+  font_family: im_fell
+  atf_experience: false
+  published: true
+  published_at: 2015-04-29 13:03:59
+  likes_count: 2
+two:
+  id: 2
+  language_id: 1
+  user_id: 1
+  atmosphere_id: 2
+  play_time_id: 2
+  price: 4.95
+  title: Titre de l'œuvre
+  abstract: |
+    Lorem ipsum dolor sit amet, consectetur adipiscing elit. In auctor tortor vel mattis feugiat. Sed vel tincidunt ligula. Curabitur varius metus quis nibh bibendum semper. Morbi sagittis egestas enim in tempus. Morbi pellentesque, lorem non rhoncus posuere, tortor mauris congue dui, mollis iaculis lorem odio in nisl. 
+  font_color: '#FFFFFF'
+  font_family: im_fell
+  atf_experience: false
+  published: true
+  published_at: 2015-04-28 13:03:59
+  likes_count: 1
+three:
+  id: 3
+  language_id: 2
+  user_id: 1
+  atmosphere_id: 1
+  play_time_id: 1
+  price: 3.95
+  title: En cours
+  abstract: |
+    Lorem ipsum dolor sit amet, consectetur adipiscing elit. In auctor tortor vel mattis feugiat. Sed vel tincidunt ligula. Curabitur varius metus quis nibh bibendum semper. Morbi sagittis egestas enim in tempus. Morbi pellentesque, lorem non rhoncus posuere, tortor mauris congue dui, mollis iaculis lorem odio in nisl. 
+  font_color: '#FFFFFF'
+  font_family: im_fell
+  atf_experience: false
+  published: true
+  published_at: 2015-04-27 13:03:59
+four:
+  id: 4
+  language_id: 2
+  user_id: 2
+  atmosphere_id: 1
+  play_time_id: 1
+  price: 6.66
+  title: En banane
+  abstract: |
+    Lorem ipsum dolor sit amet, consectetur adipiscing elit. In auctor tortor vel mattis feugiat. Sed vel tincidunt ligula. Curabitur varius metus quis nibh bibendum semper. Morbi sagittis egestas enim in tempus. Morbi pellentesque, lorem non rhoncus posuere, tortor mauris congue dui, mollis iaculis lorem odio in nisl. 
+  font_color: '#FFFFFF'
+  font_family: im_fell
+  atf_experience: true
+  published: false
+# Fixtures for integration purpose
+five:
+  id: 5
+  language_id: 2
+  user_id: 2
+  atmosphere_id: 2
+  play_time_id: 1
+  price: 6.66
+  title: En banane
+  abstract: |
+    Lorem ipsum dolor sit amet, consectetur adipiscing elit. In auctor tortor vel mattis feugiat. Sed vel tincidunt ligula. Curabitur varius metus quis nibh bibendum semper. Morbi sagittis egestas enim in tempus. Morbi pellentesque, lorem non rhoncus posuere, tortor mauris congue dui, mollis iaculis lorem odio in nisl. 
+  font_color: '#FFFFFF'
+  font_family: im_fell
+  atf_experience: true
+  published: true
+  published_at: 2015-04-29 13:02:59
+  selected: true
+  selected_at: 2015-04-29 13:03:59
+six:
+  id: 6
+  language_id: 2
+  user_id: 2
+  atmosphere_id: 2
+  play_time_id: 2
+  price: 6.66
+  title: En banane
+  abstract: |
+    Lorem ipsum dolor sit amet, consectetur adipiscing elit. In auctor tortor vel mattis feugiat. Sed vel tincidunt ligula. Curabitur varius metus quis nibh bibendum semper. Morbi sagittis egestas enim in tempus. Morbi pellentesque, lorem non rhoncus posuere, tortor mauris congue dui, mollis iaculis lorem odio in nisl. 
+  font_color: '#FFFFFF'
+  font_family: im_fell
+  atf_experience: true
+  published: true
+  published_at: 2015-04-28 13:03:59
+  selected: true
+  selected_at: 2015-04-28 13:03:59
+seven:
+  id: 7
+  language_id: 2
+  user_id: 2
+  atmosphere_id: 1
+  play_time_id: 1
+  price: 6.66
+  title: En banane
+  abstract: |
+    Lorem ipsum dolor sit amet, consectetur adipiscing elit. In auctor tortor vel mattis feugiat. Sed vel tincidunt ligula. Curabitur varius metus quis nibh bibendum semper. Morbi sagittis egestas enim in tempus. Morbi pellentesque, lorem non rhoncus posuere, tortor mauris congue dui, mollis iaculis lorem odio in nisl. 
+  font_color: '#FFFFFF'
+  font_family: im_fell
+  atf_experience: true
+  published: true
+  published_at: 2015-04-27 13:03:59
+  selected: true
+  selected_at: 2015-04-27 13:03:59
+eight:
+  id: 8
+  language_id: 2
+  user_id: 2
+  atmosphere_id: 2
+  play_time_id: 1
+  price: 6.66
+  title: En banane
+  abstract: |
+    Lorem ipsum dolor sit amet, consectetur adipiscing elit. In auctor tortor vel mattis feugiat. Sed vel tincidunt ligula. Curabitur varius metus quis nibh bibendum semper. Morbi sagittis egestas enim in tempus. Morbi pellentesque, lorem non rhoncus posuere, tortor mauris congue dui, mollis iaculis lorem odio in nisl. 
+  font_color: '#FFFFFF'
+  font_family: im_fell
+  atf_experience: true
+  published: true
+  published_at: 2015-04-26 13:03:59
+nine:
+  id: 9
+  language_id: 2
+  user_id: 2
+  atmosphere_id: 1
+  play_time_id: 1
+  price: 6.66
+  title: En banane
+  abstract: |
+    Lorem ipsum dolor sit amet, consectetur adipiscing elit. In auctor tortor vel mattis feugiat. Sed vel tincidunt ligula. Curabitur varius metus quis nibh bibendum semper. Morbi sagittis egestas enim in tempus. Morbi pellentesque, lorem non rhoncus posuere, tortor mauris congue dui, mollis iaculis lorem odio in nisl. 
+  font_color: '#FFFFFF'
+  font_family: im_fell
+  atf_experience: true
+  published: true
+  published_at: 2015-04-25 13:03:59
+ten:
+  id: 10
+  language_id: 2
+  user_id: 2
+  atmosphere_id: 1
+  play_time_id: 1
+  price: 0
+  title: Free
+  abstract: |
+    Lorem ipsum dolor sit amet, consectetur adipiscing elit. In auctor tortor vel mattis feugiat. Sed vel tincidunt ligula. Curabitur varius metus quis nibh bibendum semper. Morbi sagittis egestas enim in tempus. Morbi pellentesque, lorem non rhoncus posuere, tortor mauris congue dui, mollis iaculis lorem odio in nisl. 
+  font_color: '#FFFFFF'
+  font_family: im_fell
+  atf_experience: true
+  published: true
+  published_at: 2015-04-25 13:03:59
+eleven:
+  id: 11
+  language_id: 2
+  user_id: 2
+  atmosphere_id: 1
+  play_time_id: 1
+  price: 3
+  title: Free
+  abstract: |
+    Lorem ipsum dolor sit amet, consectetur adipiscing elit. In auctor tortor vel mattis feugiat. Sed vel tincidunt ligula. Curabitur varius metus quis nibh bibendum semper. Morbi sagittis egestas enim in tempus. Morbi pellentesque, lorem non rhoncus posuere, tortor mauris congue dui, mollis iaculis lorem odio in nisl. 
+  font_color: '#FFFFFF'
+  font_family: im_fell
+  atf_experience: true
+  published: true
+  published_at: 2015-04-25 13:03:59

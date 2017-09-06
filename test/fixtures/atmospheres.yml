@@ -1,0 +1,9 @@
+one:
+  id: 1
+  label: Romantique
+  opuses_count: 3
+
+two:
+  id: 2
+  label: Barbare
+  opuses_count: 1

@@ -1,0 +1,23 @@
+#sendmessage.modal.fade aria-hidden="true" aria-labelledby="sendMessage" role="dialog" tabindex="-1" 
+  form method="POST"
+    = tag :input, type: "hidden", name: request_forgery_protection_token.to_s, value: form_authenticity_token
+    .modal-dialog
+      .modal-content
+        .modal-header
+          button.close aria-label="Close" data-dismiss="modal" type="button" 
+            span aria-hidden="true"  &times; Fermer
+          h3.modal-title Envoyer un message
+        .modal-body
+
+          .media
+            .media-left
+              img.img-circle#sender-avatar src="http://placehold.it/64x64"
+            .media-body
+              h3#sender-title Jean Michel Dupont
+          br
+          .form-group
+            = label :contact, :content
+            = text_area :contact, :content, rows: 6, class: 'form-control'
+
+        .modal-footer
+          button.btn.btn-primary type="submit" Envoyer le message

@@ -1,0 +1,49 @@
+/ dumb
+- if opus.class.to_s == 'Opus'
+  - id = opus.id
+- else
+  - id = opus.opus_id
+
+/ dumber
+- if opus.atf_experience?
+  - front_path = front_experience_product_path(id)
+- else
+  - front_path = front_marketplace_product_path(id)
+
+.col-md-6.col-lg-6.text-center
+  .opus-wrapper
+    = link_to front_path do |link|
+      = render partial: 'front/commons/opus_cover_mini', locals: {opus: opus}
+      img.opus-mask src=asset_mask_opus
+      .opus-infos
+        i.icon-heart
+        | (
+        = opus.likes_count
+        |)
+        br
+        - if !opus.atf_experience
+          = number_to_currency opus.price
+      .opus-time
+        = opus.play_time.label.delete(" minutes")
+        |'
+
+      // /!\ div .opus-btns est toujours présente même si pas de bouton
+      .opus-btns
+        // todo: même fonctionnement back à faire ?
+        a.btn.btn-primary.btn-xs href=read_front_opus_path(id) Lire
+        '
+        - if opus.user_id == current_user.id
+          a.btn.btn-default.btn-xs href=front_opus_path(id) Éditer
+          '
+        - if remove
+          a.btn.btn-default.btn-xs href=front_bibliofeel_remove_entry_path(id) Retirer de la biblioFeel
+          '
+        - if participated && opus.user_id != current_user.id
+          a.btn.btn-default.btn-xs href=front_bibliofeel_leave_opus_path(id) Ne plus participer
+
+      br
+      br
+
+    - if owned_opus(id) || (library_opus(id) && agreement_active?)
+      / br
+      / = link_to "lire l'oeuvre", read_front_opus_path(id), class: 'btn btn-primary btn-thin'

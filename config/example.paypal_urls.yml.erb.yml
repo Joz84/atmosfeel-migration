@@ -1,0 +1,10 @@
+test: &default
+  cancel_url: 'http://<%= ENV['LOCAL_HOST'] %>/paypal-cancel'
+  return_url: 'http://<%= ENV['LOCAL_HOST'] %>/paypal-return'
+
+development:
+  <<: *default
+
+production:
+  cancel_url: 'final url'
+  return_url: 'final url'

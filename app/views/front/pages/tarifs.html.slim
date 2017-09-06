@@ -1,0 +1,101 @@
+
+
+br
+
+.row
+  .col-sm-6
+    h1 Abonnement
+    br
+    p Choisissez l'Expérience AtmosFeel qui vous convient le mieux et,
+
+    ul
+      li plongez dans de nombreuses œuvres inédites et de qualité
+      li soyez les premiers à découvrir les nouveautés mises en ligne
+      li recevez en avant-première les invitations aux événements AtmosFeel
+      li rejoignez la communauté AtmosFeel : rencontres, conseils, goodies, etc.
+
+    .tarifs#plan-select
+      .row
+        .col-sm-12
+          .row
+            .col-sm-4.tarif.tarif-pink
+              label.tarif-label
+                .tarif-head
+                  input type="radio" value=front_plans_select_path("p1") name="plan"
+                  h2.tarif-title
+                    |12
+                    br
+                    small mois
+                .tarif-price.row
+                  .col-xs-6.text-right
+                    .tarif-price-unit
+                      | 9
+                  .col-xs-6
+                    .tarif-price-decimal ,90€
+                    .tarif-pricetime
+                      |/MOIS
+
+            .col-sm-4.tarif.tarif-black
+              label.tarif-label
+                .tarif-head
+                  input type="radio" value=front_plans_select_path("p2") name="plan"
+                  h2.tarif-title
+                    |6
+                    br
+                    small mois
+                .tarif-price.row
+                  .col-xs-6.text-right
+                    .tarif-price-unit
+                      | 12
+                  .col-xs-6
+                    .tarif-price-decimal ,90€
+                    .tarif-pricetime
+                      |/MOIS
+
+            .col-sm-4.tarif.tarif-yellow
+              label.tarif-label
+                .tarif-head
+                  input type="radio" value=front_plans_select_path("p3") name="plan"
+                  h2.tarif-title
+                    |1
+                    br
+                    small mois
+                .tarif-price.row
+                  .col-xs-6.text-right
+                    .tarif-price-unit
+                      | 15
+                  .col-xs-6
+                    .tarif-price-decimal ,90€
+                    .tarif-pricetime
+                      |/MOIS
+
+    .row#discount-code data-link=front_plans_discount_path('none')
+      .col-sm-6
+        .row
+          .promo.form-inline
+            |Je dispose d'un code promo :
+            input.form-control#discount-code-value type="text"
+
+    br
+    br
+    p
+      - if user_signed_in?
+        a.btn.btn-lg.btn-primary#confirm-plan href="#" disabled="disabled"
+          |Je m'abonne
+      - else
+        = link_to "Je m'inscris", new_user_registration_path, class: 'btn btn-lg btn-primary'
+
+    br
+    br
+    p
+      | Des questions ? N'hésitez pas à nous écrire sur 
+      a href="mailto: bienvenue@atmosfeel.fr" bienvenue@atmosfeel.fr
+
+  .col-sm-6
+    br
+    img.img-responsive src=asset_path('tarifs/women.png')
+    p
+      big.c-for-copyright &copy;
+      | le vagabon.
+br
+br

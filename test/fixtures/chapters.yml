@@ -1,0 +1,16 @@
+one:
+  id: 1
+  opus_id: 1
+  title: Titre de la partie
+  content: |
+    Lorem ipsum dolor sit amet, consectetur adipiscing elit. In auctor tortor vel mattis feugiat. Sed vel tincidunt ligula. Curabitur varius metus quis nibh bibendum semper. Morbi sagittis egestas enim in tempus. Morbi pellentesque, lorem non rhoncus posuere, tortor mauris congue dui, mollis iaculis lorem odio in nisl.
+  font_color: '#FFFFFF'
+  position: 0
+two:
+  id: 2
+  opus_id: 2
+  title: Titre de la partie
+  content: |
+    Lorem ipsum dolor sit amet, consectetur adipiscing elit. In auctor tortor vel mattis feugiat. Sed vel tincidunt ligula. Curabitur varius metus quis nibh bibendum semper. Morbi sagittis egestas enim in tempus. Morbi pellentesque, lorem non rhoncus posuere, tortor mauris congue dui, mollis iaculis lorem odio in nisl.
+  font_color: '#FFFFFF'
+  position: 0

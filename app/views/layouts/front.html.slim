@@ -1,0 +1,224 @@
+doctype 5
+html[lang="en"]
+  head
+    meta[charset="utf-8"]
+    meta[http-equiv="X-UA-Compatible" content="IE=edge"]
+    meta[name="viewport" content="width=device-width, initial-scale=1.0"]
+    meta[name="description" content=""]
+    meta[name="author" content=""]
+    - if @opus
+      meta[property="og:title" content="#{@opus.title}"]
+      meta[property="og:description" content="#{@opus.abstract}"]
+      meta[property="og:image" content="#{front_root_url}#{@opus.cover_url}"]
+    title
+      | AtmosFeel
+    = stylesheet_link_tag "https://fontastic.s3.amazonaws.com/E2apByVW7PQ3whN87PBTQa/icons.css"
+    = stylesheet_link_tag "https://fonts.googleapis.com/css?family=News+Cycle:700"
+    script[src="https://s3.amazonaws.com/downloads.mailchimp.com/js/signup-forms/popup/embed.js" data-dojo-config="usePlainJson: true, isDebug: false"]
+    = stylesheet_link_tag "application", media: "all"
+    link href=(asset_path('favicon/favicon.ico')) rel="shortcut icon" type="image/x-icon"
+    = javascript_include_tag "application"
+    = csrf_meta_tags
+    /[if lt IE 9]
+      | <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.js"></script>
+      | <script src="https://cdnjs.cloudflare.com/ajax/libs/es5-shim/2.2.0/es5-shim.js"></script>
+      | <script>
+      |   document.createElement('ui-select');
+      |   document.createElement('ui-select-match');
+      |   document.createElement('ui-select-choices');
+      | </script>
+
+  body(class=body_class data-open-menu=(open_menu))
+    .main-header.main-header-marketplace
+      .container.hidden-sm.hidden-xs
+        .navigation.text-right
+          a.nav-icon.mailchimp-popup href="#"
+            img.nav-dive src=(asset_path('diver-icon-pink.png'))
+          a.nav-icon target="_blank" href="https://www.facebook.com/atmosfeel"
+            i.icon-facebook
+          a.nav-icon target="_blank" href="https://twitter.com/atmosfeel_exp"
+            i.icon-twitter
+          a.nav-icon target="_blank" href="https://fr.pinterest.com/atmosfeel/"
+            i.icon-pinterest
+          a.nav-icon target="_blank" href="https://instagram.com/atmosfeel"
+           i.icon-instagram
+          a.nav-icon target="_blank" href="http://experienceatmosfeel.tumblr.com"
+            i.icon-tumblr
+          = link_to "On parle de nous", front_nous_parlons_de_vous_path, class: 'nav-link'
+          = link_to "Qui sommes nous ?", front_about_path, class: 'nav-link'
+          = link_to "Les Voix AtmosFeel", "http://lesvoix.atmosfeel.fr", target: "_blank", class: 'nav-link'
+
+          - if user_signed_in?
+            - if show_cart?
+              = link_to front_carts_resume_path, class: 'skewed' do
+                i.icon-cart
+                = " Mon panier (#{cart_size})"
+            .drop
+              a.skewed.drop-handle href="#"
+                = "Bonjour, "
+                em
+                  = current_user.firstname
+                i.icon-caret-down
+              .drop-wrapper
+                .drop-header
+                    = link_to front_profile_path do
+                      i.icon-user
+                      = "Mon profil"
+
+                    = link_to 'Se déconnecter', destroy_user_session_path, :method => :delete
+                .drop-content.text-left
+                  .row
+                    .col-sm-6.bibliofeel-links
+                      = link_to "Ma biblioFeel", front_bibliofeel_path
+                      = link_to 'Mes créations', front_bibliofeel_path(tab: 'participated_opuses'), class: 'link-sm'
+                      = link_to 'Mes achats', front_bibliofeel_path(tab: 'marketplace'), class: 'link-sm'
+                      = link_to 'Mes œuvres avec abonnement', front_bibliofeel_path(tab: 'experience'), class: 'link-sm'
+
+                    .col-sm-6
+                      a href=front_likes_path
+                        | Œuvres que j'aime
+                      = link_to 'Nouvelle création', new_front_opus_path
+                      = link_to 'Historique des commandes', front_history_path
+
+          - else
+            = link_to "Je m'inscris", new_user_registration_path
+            = " / "
+            = link_to "Je me connecte", new_user_session_path
+
+        .logo.pull-left
+          a href="/"
+            = image_tag_logo
+
+        .navigation.pull-right.text-right
+          div.text-right
+            .main-menu
+              // = link_to "Les œuvres", front_catalog_path
+              a.dropdown-toggle href="#" data-toggle='dropdown'
+                | Les œuvres
+                '
+                span.caret
+              ul.dropdown-menu
+                li
+                  a href=front_experience_path
+                    = t('front.menu.opuses_experience')
+                li
+                  a href=front_marketplace_path
+                    = t('front.menu.opuses_marketplace')
+              = link_to 'Les artistes', front_authors_path
+              = link_to 'Comment ça marche', front_ccm_path
+              = link_to "Je m'abonne", front_tarifs_path
+              a.search-bar-handle href="#"
+                i.icon-search
+
+      .container.hidden-md.hidden-lg
+        a.menu-mobile-handle href="#"
+          i.icon-menu
+        .logo.logo-sd
+          a href="/"
+            = image_tag_logo
+
+      .menu-mobile.hidden-xs.hidden-md.hidden-lg
+        a.menu-mobile-close href="#"
+          i.icon-close
+        .top-menu.row
+          .container
+            .col-sm-4
+              a.nav-icon.mailchimp-popup href="#"
+                img.nav-dive src=(asset_path('diver-icon-pink.png'))
+              a.nav-icon target="_blank" href="https://www.facebook.com/atmosfeel"
+                i.icon-facebook
+              a.nav-icon target="_blank" href="https://twitter.com/atmosfeel_exp"
+                i.icon-twitter
+              a.nav-icon target="_blank" href="https://fr.pinterest.com/atmosfeel/"
+                i.icon-pinterest
+              a.nav-icon target="_blank" href="https://instagram.com/atmosfeel"
+               i.icon-instagram
+              a.nav-icon target="_blank" href="http://experienceatmosfeel.tumblr.com"
+                i.icon-tumblr
+            .col-sm-8
+              = link_to "On parle de nous", front_nous_parlons_de_vous_path, class: 'nav-link'
+              = link_to "Qui sommes nous ?", front_about_path, class: 'nav-link'
+              = link_to "Mentions légales", front_mentions_legales_path, class: 'nav-link'
+
+        .user-menu
+          .container
+            - if user_signed_in?
+              p
+                = "Bonjour, "
+                em
+                  = current_user.firstname
+                | &nbsp;
+                = link_to front_profile_path do
+                  i.icon-user
+                  = "Mon profil"
+                | &nbsp;
+                = link_to 'Se déconnecter', destroy_user_session_path, :method => :delete
+              hr
+              .row
+                .col-xs-6
+                  / h3.drop-subtitle
+                  /   = "Ma bibliofeel"
+                  ul.list-unstyled
+                    li
+                      = link_to "Ma biblioFeel", front_bibliofeel_path
+                      ul.list-unstyled.bibliofeel-links
+                        li
+                          = link_to 'Mes créations', front_bibliofeel_path(tab: 'participated_opuses'), class: 'link-sm'
+                        li
+                          = link_to 'Mes achats', front_bibliofeel_path(tab: 'marketplace'), class: 'link-sm'
+                        li
+                          = link_to 'Mes œuvres avec abonnement', front_bibliofeel_path(tab: 'experience'), class: 'link-sm'
+
+                .col-xs-6
+                  ul.list-unstyled
+                    li
+                      a href=front_likes_path
+                        | Œuvres que j'aime
+                    li
+                      = link_to 'Nouvelle création', new_front_opus_path
+                    li
+                      = link_to 'Historique des commandes', front_history_path
+            - else
+              p
+                = link_to "Je m'inscris", new_user_registration_path
+                = " / "
+                = link_to "Je me connecte", new_user_session_path
+
+        .primary-menu
+          .container
+            // = link_to "Les œuvres", front_catalog_path
+            a href=front_experience_path
+              = t('front.menu.opuses_experience')
+            a href=front_marketplace_path
+              = t('front.menu.opuses_marketplace')
+            = link_to 'Les artistes', front_authors_path
+            = link_to 'Comment ça marche', front_ccm_path
+            = link_to "Je m'abonne", front_tarifs_path
+            form.search-bar action=front_catalog_path method="GET"
+              input.filter-search-input type="text" placeholder="Votre recherche" name="filter[title]"
+                i.icon-search
+
+
+
+    .hidden-sm.hidden-xs
+      form.search-bar.search-bar-lg action=front_catalog_path method="GET"
+        .container
+          input.filter-search-input type="text" placeholder="Votre recherche" name="filter[title]"
+            i.icon-search
+    .main-container.nobackground
+      .container
+        = yield
+
+    .footer-container
+      .footer.footer-marketplace
+        .container
+          .pull-left
+            = "AtmosFeel "
+            big.c-for-copyright
+              | &copy;
+            = "#{Time.now.year} – tous droits réservés"
+          .pull-right
+            = link_to "On parle de nous", front_nous_parlons_de_vous_path
+            = link_to "Qui sommes nous ?", front_about_path
+            = link_to "Mentions légales", front_mentions_legales_path
+            = link_to "Conditions Générales de Vente/Utilisation", front_cgv_path

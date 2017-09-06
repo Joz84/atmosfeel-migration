@@ -1,0 +1,59 @@
+.breadcrumb
+  = front_catalog_link
+  i.icon-caret-right
+  | On parle de nous
+
+h1 Nous parlons de vous !
+
+.row.media-coverage
+  .col-md-9
+    .post
+      .media
+        /.media-left
+        /  img.img-circle src="http://placehold.it/124x124"
+        .media-body
+          /span.highlight.date-published 5 octobre 2015
+          p
+            b Nous tenons à remercier
+            | toutes les personnes qui ont contribué à la création de ce site internet :
+          ul
+            li Pierre – Transat Creative – pour le logo et le webdesign
+            li Sylvain – Volpeo – pour le développement front-end
+            li David – Wearemd – pour le développement back-end
+          p
+            | Ibrahima, notre stagiaire administrateur système ; les 19 étudiants en BTS webdesign du lycée L'initiative, Paris 19ème et leur profresseur Manuel ; Christelle pour les créations flyers et stickers toujours dans l’urgence ; Marie, enthousiaste et pro, qui nous a dégoté un studio d’enregistrement ; Jen pour le shooting photos, super moment et super résultat ; Manuela, pour l’indispensable travail sur la prose des CGU ; Danielle, Véronique, Agata et Philippe, pour leur voix, leur interprétation et leur disponibilité ; Michel et Loïc pour leurs idées et leurs visuels ; Jenny et Alice nos modèles aussi souriantes que photogéniques ; Daniel, notre tout premier investisseur (pour les autres volontaires, nous écrire à
+            a href="mailto:plongez@atmosfeel.fr"  plongez@atmosfeel.fr
+            |  !) ;
+          p Et aussi...
+          ul
+            li tous nos proches qui supportent notre AtmosFeel addiction !
+            li
+              = link_to 'tous les artistes', front_authors_path
+              '
+              | qui nous ont déjà fait confiance
+          p Et nos interlocutrices et interlocuteurs à Cap Digital, France Digitale, CCI Paris - Ile de France, Paris Région Entreprise (PRE), BPI France, Scientipôle
+
+  .col-md-12
+    .page-post-logos.post
+      .media
+        .media-left
+          a href='http://www.capdigital.com/' target='_blank'
+            img src=asset_path('logos/cap-digital.png')
+          a href='http://www.francedigitale.org/' target='_blank'
+            img src=asset_path('logos/france-digitale.png')
+
+    .page-post-logos.post
+      .media
+        .media-left
+          a href='http://www.entreprises.cci-paris-idf.fr/web/guest' target='_blank'
+            img src=asset_path('logos/cci.png')
+          a href='http://parisregionentreprises.org/' target='_blank'
+            img src=asset_path('logos/paris-region-entreprises.png')
+
+    .page-post-logos.post
+      .media
+        .media-left
+          a href='http://www.bpifrance.fr/' target='_blank'
+            img src=asset_path('logos/bpi-france.png')
+          a href='http://scientipole-initiative.org/' target='_blank'
+            img src=asset_path('logos/scientipole.png')

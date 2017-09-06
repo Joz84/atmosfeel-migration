@@ -1,0 +1,6 @@
+li.list-group-item.clearfix
+  = plan.name
+  .btn-group.pull-right
+    = link_to 'Éditer', edit_back_plan_path(plan), class: 'btn btn-primary'
+    - if plan.agreements.empty?
+      = link_to 'Supprimer', back_plan_path(plan), class: 'btn btn-danger', data: {:confirm => 'Are you sure?'}, :method => :delete

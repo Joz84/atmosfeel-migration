@@ -1,0 +1,20 @@
+h1 Générer un compte rendu des vues 
+
+form.search-bar action=views_report_back_users_path method="POST"
+  = tag :input, type: "hidden", name: request_forgery_protection_token.to_s, value: form_authenticity_token
+
+  .form-group
+    label Code œuvre
+    input.form-control type="text" name="report[isbn]"
+
+  .form-group
+    label Date de début
+    input.form-control type="text" name="report[start]"
+    .help-block format : jours/mois/années (exemple : 15/12/2015)
+
+  .form-group
+    label Date de fin
+    input.form-control type="text" name="report[end]"
+    .help-block format : jours/mois/années (exemple : 15/12/2015)
+
+  button.btn.btn-default type="submit" Submit

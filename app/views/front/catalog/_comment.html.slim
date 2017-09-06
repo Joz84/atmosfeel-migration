@@ -1,0 +1,9 @@
+.opus-comment.media
+  .media-left
+    img.img-circle src=comment.user.avatar.url(:mini)
+  .media-body
+    p
+      = link_to comment.user_title, front_author_path(comment.user)
+      |, le 
+      = l comment.created_at, format: :short
+    p= simple_format comment.content

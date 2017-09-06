@@ -1,0 +1,10 @@
+<% if !@opuses.empty? %>
+  <% if @replace_items %>
+    $('#<%= @replacement_target %>').find('.items').html('<%= escape_javascript render(partial: "item_big", collection: @opuses, as: :opus, locals: {participated: @participated, remove: @remove}) %>');
+  <% else %>
+    $('<%= escape_javascript render(partial: "item_big", collection: @opuses, as: :opus, locals: {participated: @participated, remove: @remove}) %>').appendTo($('#<%= @replacement_target %>').find('.items'));
+  <% end %>
+  $('#<%= @replacement_target %>').find('.opus-pagination .hidden').html('<%= escape_javascript paginate(@opuses) %>');
+<% else %>
+  $('#<%= @replacement_target %>').find('.items').html('<h3>Aucune œuvre trouvée</h3>');
+<% end %>

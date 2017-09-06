@@ -1,0 +1,148 @@
+.home-carousel {
+  margin: 20px 0;
+  border: 4px solid white;
+}
+
+.atmospheres-list {
+  font-family: "News Cycle", arial;
+  font-size: 18px;
+  color: $black;
+  list-style: none;
+  padding: 0;
+  margin-bottom: 40px;
+  li {
+    a {
+      padding: 10px;
+      background: white;
+      margin: 3px;
+      display: inline-block;
+      color: #333;
+      &.active {
+        color: white;
+        background: $black;
+      }
+    }
+
+    @media screen and (max-width: $break-sm) { 
+      display: inline-block;
+    }
+  }
+}
+.tabs-accordeon {
+  margin: 20px 0 40px;
+  .tabs {
+    @media screen and (max-width: $break-sm) { 
+      display: none;
+    }
+    list-style: none;
+    padding: 0;
+    margin-bottom: 0;
+    li {
+      display: inline-block;
+      a {
+        display: inline-block;
+        border: 1px solid $mid-gray;
+        border-bottom: 0;
+        background: $light-gray;
+        font-family: "News Cycle", arial;
+        font-size: 15px;
+        padding: 10px 15px;
+        margin-right: 4px;
+        &.selected {
+          color: $black;
+          background: white;
+        }
+      }
+    }
+  }
+  .panels .panel-tab {
+    margin-top: -1px;
+    border: 1px solid $mid-gray;
+    border-bottom: 0;
+    padding: 4px;
+    box-shadow: inset 0 0 0 4px white;
+    display: none;
+  }
+  .more-opus {
+    text-align: center;
+    background: white;
+    border: 1px solid $mid-gray;
+    border-top: 0;
+    padding: 10px 0 14px;
+    text-decoration: underline;
+    font-family: "News Cycle", arial;
+  }
+  .drawer {
+    display: none;
+    a {
+      display: block;
+      background: white;
+      text-align: center;
+      border: 1px solid $mid-gray;
+      background: $light-gray;
+      font-family: "News Cycle", arial;
+      font-size: 15px;
+      padding: 10px 15px;
+      &.selected {
+        background: white;
+      }
+    }
+    @media screen and (max-width: $break-sm) { 
+      display: block;
+    }
+  }
+}
+
+.img-content {
+  max-width: 100%;
+  border: 4px solid white;
+}
+.home-footer {
+  @media screen and (max-width: $break-sm) { 
+    text-align: center;
+    .home-footer-cta {
+      margin-top: 10px;
+    }
+  }
+  margin-top: 40px;
+  font-family: "News Cycle", arial;
+  background: $sycamore;
+  color: white;
+  padding: 20px 0;  
+  text-align: right;
+  font-size: 18px;
+  strong {
+    color: $dolly;
+    text-transform: uppercase;
+  }
+}
+.btn-white {
+  background: white;
+  color: $sycamore;
+}
+
+.promo {
+  background: white;
+  padding: 15px 20px;
+  margin-top: 20px;
+  font-size: 16px;
+  input {
+    margin-left: 20px;
+  }
+}
+
+.author-thumb {
+  width: 124px;
+}
+.author-resume {
+  max-width: 600px;
+  font-size: 20px;
+}
+
+.artist-detail-opuses-title {
+  margin-top: 20px;
+}
+
+.artist-detail-opuses-list {
+  font-size: 15px;
+}

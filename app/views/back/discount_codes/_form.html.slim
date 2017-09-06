@@ -1,0 +1,19 @@
+= form_for [:back, @discount_code] do |f|
+  .form-group
+    = f.label :denomination
+    = f.text_field :denomination, class: 'form-control'
+  .form-group
+    = f.label :value
+    = f.text_field :value, class: 'form-control'
+  .form-group
+    = f.label :cycles
+    = f.number_field :cycles, class: 'form-control'
+  .form-group
+    = f.label :months_of_validity
+    = f.number_field :months_of_validity, class: 'form-control'
+    - if !@discount_code.id.nil?
+      p.help-block 
+        | Actuellement valable jusqu'au
+        = l @discount_code.validity_limit, format: :short
+
+  = f.submit 'Save'

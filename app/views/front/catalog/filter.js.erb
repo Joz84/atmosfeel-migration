@@ -1,0 +1,10 @@
+<% if !@opuses.empty? %>
+  <% if @replace_items %>
+    $('#items').html('<%= escape_javascript render(partial: "front/catalog/item_big", collection: @opuses, as: :opus) %>');
+  <% else %>
+    $('<%= escape_javascript render(partial: "front/catalog/item_big", collection: @opuses, as: :opus) %>').appendTo($('#items'));
+  <% end %>
+  $('.opus-pagination .hidden').html('<%= escape_javascript paginate(@opuses) %>');
+<% else %>
+  $('#items').html('<p>Aucune œuvre trouvée</p>');
+<% end %>

@@ -1,0 +1,154 @@
+.opus-wrapper {
+  min-height: 250px;
+  // background: red;
+  position: relative;  
+  display: inline-block;
+  .opus-bg {
+    width: 191px;
+    height: 190px;
+    object-fit: cover;
+    overflow: hidden;
+    position: absolute;
+    z-index: 0;
+    top: 9px;
+    left: 12px
+  }
+  .opus-mask {
+    z-index: 1;
+    position: relative;
+  }
+  .opus-infos {
+    z-index: 3;
+    position: absolute;
+    top: 14px;
+    left: 120px;
+    width: 174px;
+    height: 190px;
+    text-align: center;
+    color: $black;
+    font-size: 15px;
+    line-height: 26px;
+    font-family: "News Cycle", arial;
+  }
+  .opus-time {
+    z-index: 3;
+    position: absolute;
+    top: 135px;
+    left: 120px;
+    width: 174px;
+    text-align: center;
+    font-size: 18px;
+    font-weight: bold;
+    color: white;
+  }
+  .opus-btns {
+    // background: red;
+    min-height: 30px;
+  }
+  [class^="icon"] {
+    color: $pelorous;
+  }
+}
+
+.opus-diamond-wrapper {
+  position: relative;  
+  display: inline-block;
+  .opus-bg {
+    width: 208px;
+    height: 415px;
+    object-fit: cover;
+    overflow: hidden;
+    position: absolute;
+    z-index: 0;
+    top: 0;
+    left: 0;
+  }
+  .opus-mask {
+    z-index: 1;
+    position: relative;
+  }
+  .opus-time {
+    z-index: 3;
+    position: absolute;
+    top: 365px;
+    left: 0;
+    width: 208px;
+    text-align: center;
+    font-size: 18px;
+    font-weight: bold;
+    color: white;
+  }
+}
+
+.opus-detail-ambience-btn,
+.opus-detail-ambience-btn:hover,
+.opus-detail-ambience-btn:focus,
+.opus-detail-ambience-btn:active {
+  color: #333 !important;
+  border: none;
+  margin-bottom: 20px;
+}
+
+.opus-links {
+  a {
+    margin: 0 5px;
+    display: inline-block;
+    font-size: 14px !important;
+  }
+}
+
+.opus-detail {
+  font-size: 16px;
+  padding-bottom: 14px 0;
+  margin-right: 8px;
+  margin: 10px 8px 0 0;
+  display: block;
+  float: left;
+  width: 100%;
+}
+
+.opus-detail-icon {
+  width: 20px;
+  display: inline-block;
+  float: left;
+}
+
+.opus-detail-title {
+  width: 110px;
+  display: inline-block;
+  float: left;
+}
+
+.opus-detail-mention {
+  margin-left: 20px;
+  display: block;
+  float: left;
+}
+
+.opus-detail-keywords {
+  margin-top: 20px;
+}
+
+.opus-comment {
+  margin: 40px 0;
+  .opus-comment-form {
+    width: 100%;
+  }
+}
+
+.feellist {
+  padding: 0;
+  margin: 0;
+  list-style: none;
+  li a {
+    padding: 6px 0;
+    display: inline-block;
+  }
+}
+
+.btn-black {
+  background: $black;
+  border: none;
+  color: white;
+  border-radius: 0;
+}

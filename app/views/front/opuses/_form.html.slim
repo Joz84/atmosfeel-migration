@@ -1,0 +1,358 @@
+div(ng-app="AtmEditor")
+  div ng-controller=("MainCtrl as ctrl") 
+  
+    .row
+      .col-md-8.col-md-offset-2
+        .wizard-header
+          a class="btn btn-wizard" ng-click="current=1" ng-class="{current: (current==1)}"
+            = "1. Mon texte"
+          a class="btn btn-wizard" ng-click="current=2" ng-class="{current: (current==2)}"
+            = "2. Les options de mon texte"
+
+        .wizard-page ng-show="current==2"
+          h2 Les options de mon texte
+          hr
+          .row
+            .col-md-4
+              h3 Langue
+              .form-inline
+                select ng-model="opus.language_id" class="form-control"
+                  - @languages.each do |l|
+                    option value= l.id
+                      = l.label
+
+              h3#price Prix
+              p.text-danger ng-show="badPriceFormat"
+                |Le format du prix doit être "x,xx" avec une virgule.
+                br
+                |Ex : 0,99 ou 2,50
+              .form-inline
+                .input-group
+                  input class="form-control" ng-model="opus.price" type="text"
+                  .input-group-addon €
+
+            .col-md-8
+              h3 Auteur du texte
+              .form-inline
+                .input-group
+                  input class="form-control" type="text" placeholder="Exemple : Charles Baudelaire" ng-model="opus.author_override"
+                  p.help-block Renseigner seulement si vous n'êtes pas l'auteur de ce texte
+
+            .col-md-8
+              h3 Collaborateurs de l'œuvre
+              table.table.table-striped ng-show="opus.collaborations_attributes.length > 0"
+                tr ng-repeat="col in opus.collaborations_attributes" ng-hide="col._destroy"
+                  td 
+                    span ng-bind-template="{{col.user_attributes.title}}" ng-show="col.user_attributes.email"
+                    | <ui-select ng-model="user.selected[$index]"
+                    |            ng-hide="col.user_attributes.email"
+                    |            theme="bootstrap"
+                    |            ng-disabled="disabled"
+                    |            reset-search-input="true"
+                    |            on-select="updateCollaborationsScope($item, $index)"
+                    |            >
+                    |   <ui-select-match placeholder="Chercher un collaborateur">{{$select.selected.title}}</ui-select-match>
+                    |   <ui-select-choices repeat="user in users track by $index"
+                    |            refresh="refreshUsers($select.search)"
+                    |            refresh-delay="0">
+                    |     <span ng-bind="user.title"></span>
+                    |   </ui-select-choices>
+                    | </ui-select>
+                  td 
+                    select.form-control ng-model="col.collaboration_type_id"
+                      - @collaboration_types.each do |c|
+                        option value= c.id
+                          = c.label
+                  td.text-right
+                    a ng-click="removePartner($index)"
+                      i.icon-trash
+
+              p.text-center.text-muted ng-show="!opus.collaborations_attributes || opus.collaborations_attributes.length <= 0"
+                = "photographe, musicien, illustrateurs, etc."
+              .row
+                a href="#" ng-click="addPartner()" class="btn btn-link pull-right"
+                  = "Ajouter un collaborateur"
+          
+          h3#title Titre et résumé
+          p.text-danger ng-show="titleRequired"
+            |Le titre est obligatoire
+          p.text-danger ng-show="abstractRequired"
+            |Le résumé est obligatoire
+          .writer
+            input class="form-control input-lg writer-header" ng-model="opus.title" type="text" placeholder="Le titre de mon oeuvre" required="required"
+            textarea class="form-control writer-body" rows="8" ng-model="opus.abstract" placeholder="Pour donner envie à des lecteurs ou à des artistes, décrivez ici votre œuvre, même succinctement (telle une 4ème de couverture pour un livre). N'oubliez pas de citer toutes les personnes ayant participé à votre œuvre."
+
+          h3 Voix
+          table.table.table-striped ng-show="opus.voices_attributes.length > 0"
+            tr ng-repeat="voice in opus.voices_attributes" ng-hide="voice._destroy"
+              td width="30px" 
+                i.icon-music
+              td width="300px" ng-hide="(voice.file.url||voice.local_file)"
+                label 
+                  span.btn.btn-default  Choisir un fichier audio
+                  input.ng-hide type="file" ng-file-select="" ng-model="voice.model" ng-file-change="uploadVoice($files, $event, $rejectedFiles, opus, $index)"
+                img.mini-spinner src=asset_path('spinner.gif') ng-show="voice.spinner"
+              td width="300px" ng-show="voice.file.url||voice.local_file"
+                / audio controls="controls"
+                /   source ng-src="{{voice.file.url}}" type="audio/ogg" ng-show="voice.file.url"
+                /   source ng-src="{{voice.local_file}}" type="audio/ogg" ng-show="voice.local_file"
+              td
+                input type="text" class="form-control" ng-model="voice.title" placeholder="Langue de la voix"
+              td.text-right
+                a ng-click="removeVoice(opus, $index)"
+                  i.icon-trash
+          .row
+            a href="#" ng-click="addVoice(opus)" class="btn btn-link pull-right"
+              = "Ajouter un fichier voix"
+          
+          h3 Musique
+          table.table.table-striped ng-show="opus.musics_attributes.length > 0"
+            tr ng-repeat="music in opus.musics_attributes" ng-hide="music._destroy"
+              td width="30px" 
+                i.icon-music
+              td width="300px" ng-hide="music.file.url||music.local_file"
+                label 
+                  span.btn.btn-default  Choisir un fichier audio
+                  input.ng-hide type="file" ng-file-select="" ng-model="music.model" ng-file-change="uploadMusic($files, $event, $rejectedFiles, opus, $index)"
+                img.mini-spinner src=asset_path('spinner.gif') ng-show="music.spinner"
+              td width="300px" ng-show="music.file.url||music.local_file"
+                / audio controls="controls"
+                /   source ng-src="{{music.file.url}}" type="audio/ogg" ng-show="music.file.url"
+                /   source ng-src="{{music.local_file}}" type="audio/ogg" ng-show="music.local_file"
+              td
+                input type="text" class="form-control" ng-model="music.title" placeholder="Titre du morceau"
+              td.text-right
+                a ng-click="removeMusic(opus, $index)"
+                  i.icon-trash
+
+          
+          .row
+            a href="#" ng-click="addMusic(opus)" class="btn btn-link pull-right"
+              = "Ajouter un fichier musical"
+
+          h3 
+            = "Couverture"
+          .row
+            .col-md-4
+              span.preview-wrapper ng-show="opus.cover.url||opus.local_file"
+                a.btn.btn-default.btn-sm.preview-delete ng-click="removeCover()" 
+                  i.icon-trash
+                img.preview-image ng-src="{{opus.cover.url}}" ng-show="opus.cover.url"
+                img.preview-image ng-src="{{opus.local_file}}" ng-show="opus.local_file"
+
+              label ng-hide="opus.cover.url||opus.local_file"
+                span.btn.btn-default  Choisir une image
+                input.ng-hide type="file" ng-file-select="" ng-model="cover" ng-file-change="uploadCover($files, $event, $rejectedFiles)"
+                img.mini-spinner src=asset_path('spinner.gif') ng-show="opus.coverSpinner"
+            
+              p.text-muted
+                = "N'oubliez pas d'ajouter le copyright sur chaque image."
+                
+
+
+            .col-md-8
+              label Couleur du texte
+              .color-picker ng-init="fontColorOpen=0" click-elsewhere="fontColorOpen=0"
+                .color-preview ng-click="fontColorOpen = !fontColorOpen"
+                  .color-preview-color style="background:{{opus.font_color}}"
+                ng-farbtastic.color-choose  ng-show="fontColorOpen" ng-model="opus.font_color"
+              
+              br
+              label Police de l'œuvre
+              .form-inline
+                select class="form-control" ng-model="opus.font_family"
+                  - Opus.fonts.each do |font|
+                    option value= font.gsub(' ', '+')
+                      = font
+              p class="font-preview {{opus.font_family | classify}}"
+                = "«Voix ambiguë d'un cœur qui, au zéphyr, préfère les jattes de kiwis.»"
+
+          h3 Autres
+          table.table.table-striped
+            tr
+              td 
+                strong Atmosphère
+              td
+                .form-inline
+                  select class="form-control" ng-model="opus.atmosphere_id"
+                    - @atmospheres.each do |l|
+                      option value= l.id
+                        = l.label
+            tr
+              td 
+                strong Durée
+                p 200 mots = 1mn
+              td
+                .form-inline
+                  select class="form-control" ng-model="opus.play_time_id"
+                    - @play_times.each do |l|
+                      option value= l.id
+                        = l.label
+            tr
+              td 
+                strong Mots-clefs
+                br
+                span
+                  | Appuyer sur Entrée
+                  br
+                  | entre chaque mot-clef
+              td
+                span ng-repeat="keyword in opus.keyword_opuses_attributes" ng-hide="keyword._destroy"
+                  span ng-bind="keyword.label"
+                  | 
+                  a ng-click="removeKeyword($index)" &times;
+                form ng-submit="pushKeyword(false)"
+                  input.form-control placeholder="Humoir noir, poésie, XIX siècle, Victor Hugo, etc." ng-model="newKeyword" type="text" ng-keyup="autocompleteKeyword()"
+                .proposed-keywords
+                  ul
+                    li ng-repeat="keyword in proposedKeywords"
+                      a ng-click="pushKeyword(true, keyword)" ng-bind="keyword.label"
+
+          = render partial: 'form_well_row_save'
+          
+
+        .wizard-page ng-show="current==1"
+          h2 Mon texte
+          hr
+          p Le titre de votre oeuvre et d'autres détails vous seront demandés dans la prochaine étape.
+          p Si vous souhaitez conserver votre mise en page, faites un copier/coller à partir d'un fichier txt
+
+          .panel-group
+            .panel.panel-default ng-repeat="chapter in opus.chapters_attributes" ng-click="showChapter($index)" ng-hide="opus.chapters_attributes[$index]._destroy"
+              .panel-heading
+                .container-fluid
+                  .row
+                    h3.panel-title.pull-left ng-click="showChapter($index)"
+                      = "Partie "
+                      span ng-bind="$index + 1"
+                      
+                    .pull-right
+                      a href="#" ng-click="removeChapter($index)" 
+                        = "Supprimer"
+
+              .panel-body ng-show="currentChapter == $index"
+                p.text-danger ng-show="chapter.error"
+                  |Le contenu de la partie est obligatoire.
+                .write
+                  input class="form-control input-lg writer-header" ng-model="chapter.title" type="text" placeholder="Titre de la partie (facultatif)"
+                  wysiwyg textarea-id="question" textarea-class="form-control" textarea-height="180px" textarea-name="textareaQuestion" ng-model="chapter.content" enable-bootstrap-title="true" textarea-menu="menu" disabled="disabled" textarea-placeholder="{{currentChapter==0 ? "Entrez ici le début de votre texte qui correspondra à l'extrait de votre oeuvre, disponible gratuitement sur le site" : 'Entrez ici la suite de votre texte'}}"
+                br
+
+                div ng-show="$index == 0"
+                  h3 Options facultatives
+                  label Voix pour l’extrait gratuit
+                  table.table.table-striped ng-show="chapter.voices_attributes.length > 0"
+                    tr ng-repeat="voice in chapter.voices_attributes" ng-hide="voice._destroy"
+                      td width="30px" 
+                        i.icon-music
+                      td width="300px" ng-hide="(voice.file.url||voice.local_file)"
+                        label 
+                          span.btn.btn-default  Choisir un fichier audio
+                          input.ng-hide type="file" ng-file-select="" ng-model="voice.model" ng-file-change="uploadVoice($files, $event, $rejectedFiles, chapter, $index)"
+                        img.mini-spinner src=asset_path('spinner.gif') ng-show="voice.spinner"
+                      td width="300px" ng-show="voice.file.url||voice.local_file"
+                        / audio controls="controls"
+                        /   source ng-src="{{voice.file.url}}" type="audio/ogg" ng-show="voice.file.url"
+                        /   source ng-src="{{voice.local_file}}" type="audio/ogg" ng-show="voice.local_file"
+                      td
+                        input type="text" class="form-control" ng-model="voice.title" placeholder="Langue de la voix"
+                      td.text-right
+                        a ng-click="removeVoice(chapter, $index)"
+                          i.icon-trash
+
+                  .row
+                    a href="#" ng-click="addVoice(chapter)" class="btn btn-link pull-right"
+                      = "Ajouter un fichier voix"
+                  
+                  label Musique pour l’extrait gratuit
+                  table.table.table-striped ng-show="chapter.musics_attributes.length > 0"
+                    tr ng-repeat="music in chapter.musics_attributes" ng-hide="music._destroy"
+                      td width="30px" 
+                        i.icon-music
+                      td width="300px" ng-hide="music.file.url||music.local_file"
+                        label 
+                          span.btn.btn-default  Choisir un fichier audio
+                          input.ng-hide type="file" ng-file-select="" ng-model="music.model" ng-file-change="uploadMusic($files, $event, $rejectedFiles, chapter, $index)"
+                        img.mini-spinner src=asset_path('spinner.gif') ng-show="music.spinner"
+                      td width="300px" ng-show="music.file.url||music.local_file"
+                        / audio controls="controls"
+                        /   source ng-src="{{music.file.url}}" type="audio/ogg" ng-show="music.file.url"
+                        /   source ng-src="{{music.local_file}}" type="audio/ogg" ng-show="music.local_file"
+                      td
+                        input type="text" class="form-control" ng-model="music.title" placeholder="Titre du morceau"
+                      td.text-right
+                        a ng-click="removeMusic(chapter, $index)"
+                          i.icon-trash 
+
+                  .row
+                    a href="#" ng-click="addMusic(chapter)" class="btn btn-link pull-right"
+                      = "Ajouter un fichier musical"
+
+                .row
+                  .col-md-6.chapter-slider
+                    label Images illustrant cette partie
+                    br
+                    br
+                    .row
+                      .col-md-4 ng-repeat="slide in chapter.slider_entries_attributes" ng-hide="slide._destroy"
+                        span.preview-wrapper 
+                          a.btn.btn-default.btn-sm.preview-delete ng-click="removeChapterSlide($parent.$index, $index)" 
+                            i.icon-trash
+                          img.preview-image ng-src="{{slide.file.url}}" ng-show="slide.file.url"
+                          img.preview-image ng-src="{{slide.local_file}}" ng-show="slide.local_file"
+                    br
+                    label
+                      span.btn.btn-default  Ajouter une image
+                      input.ng-hide type="file" ng-file-select="" ng-model="slide.image" ng-file-change="uploadChapterSlide($files, $event, $rejectedFiles, $index)"
+                      img.mini-spinner src=asset_path('spinner.gif') ng-show="chapter.sliderSpinner"
+
+
+                  .col-md-6
+                    label Image en arrière‐plan de votre texte
+                    br
+                    br
+                    span.preview-wrapper ng-show="opus.chapters_attributes[$index].background_image.url||opus.chapters_attributes[$index].local_file"
+                      a.btn.btn-default.btn-sm.preview-delete ng-click="removeChapterCover($index)" 
+                        i.icon-trash
+                      img.preview-image ng-src="{{opus.chapters_attributes[$index].background_image.url}}" ng-show="opus.chapters_attributes[$index].background_image.url"
+                      img.preview-image ng-src="{{opus.chapters_attributes[$index].local_file}}" ng-show="opus.chapters_attributes[$index].local_file"
+                    br
+                    label ng-hide="opus.chapters_attributes[$index].background_image.url||opus.chapters_attributes[$index].local_file"
+                      span.btn.btn-default  Ajouter une image
+                      input.ng-hide type="file" ng-file-select="" ng-model="chapter.cover" ng-file-change="uploadChapterCover($files, $event, $rejectedFiles, $index)"
+                      img.mini-spinner src=asset_path('spinner.gif') ng-show="chapter.coverSpinner"
+
+                .col-md-12
+                  p.text-center.text-muted
+                    = "N'oubliez pas d'ajouter le copyright sur chaque image."
+
+
+                label Couleur du texte
+                .color-picker ng-init="colorChapterOpen[$index]=0" click-elsewhere="colorChapterOpen[$index]=0"
+                  .color-preview ng-click="colorChapterOpen[$index] = !colorChapterOpen[$index]"
+                    .color-preview-color style="background:{{chapter.font_color}}"
+                  ng-farbtastic.color-choose  ng-show="colorChapterOpen[$index]" ng-model="chapter.font_color"
+          p.text-center
+            a ng-click="addChapter()" class="btn btn-warning"
+              | {{opus.chapters_attributes.length ? "Déposer la suite de mon texte" : "Déposer mon texte"}}
+
+          = render partial: 'form_well_row_next'
+
+    .overlay ng-hide="hide_overlay"
+      .container-vertical-centered
+        .spinner
+          .spinner-container.container1
+            .circle1
+            .circle2
+            .circle3
+            .circle4
+          .spinner-container.container2
+            .circle1
+            .circle2
+            .circle3
+            .circle4
+          .spinner-container.container3
+            .circle1
+            .circle2
+            .circle3
+            .circle4

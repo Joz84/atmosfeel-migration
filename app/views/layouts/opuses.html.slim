@@ -1,0 +1,66 @@
+doctype 5
+html[lang="en"]
+  head
+    meta[charset="utf-8"]
+    meta[http-equiv="X-UA-Compatible" content="IE=edge"]
+    meta[name="viewport" content="width=device-width, initial-scale=1.0"]
+    meta[name="description" content=""]
+    meta[name="author" content=""]
+    title
+      | Atmosfeel
+    = stylesheet_link_tag "https://fontastic.s3.amazonaws.com/E2apByVW7PQ3whN87PBTQa/icons.css"
+    = stylesheet_link_tag "https://netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css"
+    = stylesheet_link_tag "application", media: "all"
+    link href=(asset_path('favicon/favicon.ico')) rel="shortcut icon" type="image/x-icon"
+    = javascript_include_tag "application"
+    = csrf_meta_tags
+    /[if lt IE 9]
+      | <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.js"></script>
+      | <script src="https://cdnjs.cloudflare.com/ajax/libs/es5-shim/2.2.0/es5-shim.js"></script>
+      | <script>
+      |   document.createElement('ui-select');
+      |   document.createElement('ui-select-match');
+      |   document.createElement('ui-select-choices');
+      | </script>
+
+
+
+  body class=(yield(:opus_body_class)) data-open-menu=(open_menu)
+    .main-header.main-header-editor
+      .container
+        .row
+          .logo.pull-left
+            = link_to front_root_path do
+              = image_tag "atmosfeel-logo-mini.png"
+          .navigation.pull-right
+            .drop
+              a.skewed.drop-handle href="#"
+                = "Bonjour, "
+                em
+                  = current_user.firstname
+                i.icon-caret-down
+              .drop-wrapper
+                .drop-header
+                  - if user_signed_in?
+                    = link_to front_profile_path do
+                      i.icon-user
+                      = "Mon profil"
+
+                    = link_to 'Se déconnecter', destroy_user_session_path, :method => :delete 
+                .drop-content.text-left
+                  .row 
+                    .col-sm-6
+                      = link_to "Ma biblioFeel", front_bibliofeel_path
+                      = link_to 'Mes œuvres', front_bibliofeel_path, class: 'link-sm'
+                      = link_to 'Achats Marketplace', front_bibliofeel_path, class: 'link-sm'
+                      = link_to 'Œuvres ajoutées Expérience', front_bibliofeel_path, class: 'link-sm'
+                      
+                    .col-sm-6
+                      a href="#"
+                        | Œuvres que j'aime
+                      = link_to 'Nouvelle création', new_front_opus_path
+                      = link_to 'Historique des commandes', front_history_path
+
+    .main-container.main-container-editor
+      .container
+        = yield

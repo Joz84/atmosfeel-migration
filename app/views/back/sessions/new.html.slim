@@ -1,0 +1,7 @@
+= form_for resource, as: resource_name, url: session_path(resource_name), html: {class: 'form-signin', role: 'form'} do |f|
+  h2.form-signin-heading
+    | Please sign in
+  = f.email_field :email, class: 'form-control', placeholder: 'Email', required: true, autofocus: true
+  = f.password_field :password, class: 'form-control', placeholder: 'Mot de passe', required: true
+  button.btn.btn-lg.btn-primary.btn-block[type="submit"]
+    | Sign in

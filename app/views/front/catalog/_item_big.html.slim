@@ -1,0 +1,31 @@
+.col-md-6.col-lg-6.text-center
+  .opus-wrapper
+    = link_to front_product_path(opus.id) do |link|
+      = render partial: 'front/commons/opus_cover_mini', locals: {opus: opus}
+      img.opus-mask src=asset_mask_opus
+      .opus-infos
+        i.icon-heart 
+        | (
+        = opus.likes_count
+        |)
+        br
+        - if !opus.atf_experience
+          = number_to_currency opus.price
+      .opus-time
+        = opus.play_time.label.delete(" minutes")
+        |'
+
+      // /!\ div .opus-btns est toujours présente même si pas de bouton
+      .opus-btns
+        - if can_read(opus.id)
+          a.btn.btn-primary.btn-xs href=read_front_opus_path(opus) Lire
+          '
+        - if can_edit(opus)
+          a.btn.btn-default.btn-xs href=front_opus_path(opus) Éditer
+
+      br
+      br
+
+    - if owned_opus(opus.id)
+      / br
+      / = link_to "lire l'oeuvre", read_front_opus_path(opus.id), class: 'btn btn-primary btn-thin'

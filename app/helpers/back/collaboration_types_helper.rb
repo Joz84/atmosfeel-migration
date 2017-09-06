@@ -1,0 +1,2 @@
+module Back::CollaborationTypesHelper
+end

@@ -1,0 +1,40 @@
+.breadcrumb
+  = link_to 'AtmosFeel expérience', front_experience_path
+  i.icon-caret-right
+  = link_to 'Mon profil', front_profile_path
+  i.icon-caret-right
+  | Mes coordonnées bancaires
+
+h1 Mes coordonnées bancaires
+
+hr
+
+.row
+  .col-md-6
+    form
+    = form_for @bank_detail, url: front_update_bank_path, method: :post do |f|
+      .form-group
+        label for="iban" IBAN
+        = f.text_field :iban, class: 'form-control'
+
+      .form-group
+        label for="bic" 
+          |BIC 
+          small.text-muted 
+            | (facultatif, si compte Français)
+        = f.text_field :bic, class: 'form-control'
+
+      .form-group
+        label for="firstname" Prénom du titulaire
+        = f.text_field :owner_firstname, class: 'form-control'
+
+      .form-group
+        label for="lastname" Nom du titulaire
+        = f.text_field :owner_lastname, class: 'form-control'
+
+      .form-group
+        label for="address" Adresse du titulaire
+        = f.text_area :owner_address, rows: 6, class: 'form-control'
+
+      p
+        input.btn.btn-primary type="submit" value="Enregistrer les modifications"

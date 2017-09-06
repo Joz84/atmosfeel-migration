@@ -1,0 +1,13 @@
+h1 Mes créations
+hr
+table.table.table-striped
+  thead
+    tr
+      th Titre de l'œuvre
+      th Code oeuvre
+      th Statut
+      th Statistiques
+  tbody
+    = render @opuses
+  
+= link_to 'Nouvelle œuvre', new_front_opus_path, class: "btn btn-primary pull-right"

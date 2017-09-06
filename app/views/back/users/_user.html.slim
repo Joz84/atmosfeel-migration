@@ -1,0 +1,6 @@
+li.list-group-item.clearfix
+  = user.email
+  - if user.accepts_newsletter
+    span.badge Souhaite recevoir la FeelLetter
+  / .btn-group.pull-right
+  /   = link_to 'Détails', back_user_path(user), class: 'btn btn-primary'

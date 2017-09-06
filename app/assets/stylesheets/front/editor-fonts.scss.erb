@@ -1,0 +1,10 @@
+<% Opus.fonts.each do |font| %>
+
+@import url(https://fonts.googleapis.com/css?family=<%= font.gsub(' ', '+') %>);
+
+.<%= font.gsub(' ', '-').downcase %> {
+  font-family: "<%= font %>"; 
+}
+
+<% end %>
+

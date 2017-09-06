@@ -1,0 +1,207 @@
+.breadcrumb
+  = front_catalog_link
+  i.icon-caret-right
+  = @opus.title
+
+.row 
+  .col-md-3
+    .opus-diamond-wrapper
+      = render partial: 'front/commons/opus_cover_show', locals: {opus: @opus}
+      a href=front_preview_product_path(@opus)
+        img.opus-mask src=asset_mask_diamond
+      .opus-time
+        = @opus.play_time.label.delete(" minutes")
+        |'
+  .col-md-6
+    h1 = @opus.title
+    a.opus-detail-ambience-btn.btn.btn-default style=atmosphere_style(@opus.atmosphere) href=front_catalog_path(filter: {atmosphere_id: @opus.atmosphere_id}) 
+      = @opus.atmosphere.label
+
+    p
+      - if !@opus.atf_experience
+        = t '.sells', count: @opus.validated_orders.length 
+        | - Publié 
+      - else
+        | Publié 
+      - if @opus.published_at
+        | le 
+        = l @opus.published_at, format: :short
+      - else
+        | le 
+        = l @opus.created_at, format: :short
+      | dans l'atmosphère 
+      = @opus.atmosphere.label
+
+    p.opus-links
+      strong
+        / v2todo
+        / a href="#" 
+        /   i.icon-plus
+        /   | Ajouter à une feelList
+        / |
+        -  if user_signed_in?    
+          a href=(front_like_path(@opus.id)) class="ajax-like-opus #{add_class?(@like_opus, 'loved')}"
+            i.icon-heart
+            | J'aime
+        - else
+          i.icon-heart
+        span.like-opus-count
+          | (
+          = @opus.likes_count
+          |)
+
+        small
+          a#share-opus href="#" data-target="#shareModal" data-toggle="modal" Partager 
+          -  if user_signed_in? && !@opus.flagged
+            = link_to 'Signaler', front_catalog_flag_path(@opus.id)
+          - elsif user_signed_in? && @opus.flagged
+            span.btn-danger 
+              | Œuvre signalée  
+
+
+    h3 Résumé
+    div
+      - if not @opus.abstract.blank?
+        = simple_format @opus.abstract
+      - else
+        .text-muted Pas de résumé pour cette oeuvre
+
+    h3 Détails
+    .opus-detail
+      i.opus-detail-icon.icon-pen
+      '
+      span.opus-detail-title = @opus.language_label
+    .opus-detail
+      i.opus-detail-icon.icon-headphone
+      '
+      span.opus-detail-title
+        | Français
+    .opus-detail
+      i.opus-detail-icon.icon-music
+      '
+      span.opus-detail-title = t '.musics', count: @opus.musics.length
+      '
+      - if @opus.musics.length == 0 && user_signed_in? && current_user.id != @opus.user_id && @opus.user.accepts_contact
+        small.opus-detail-mention
+          a href='#' data-target="#sendmessage" data-toggle="modal" data-action=contact_front_author_path(@opus.user_id) data-recipient-title=@opus.user.title data-recipient-avatar="http://placehold.it/64x64"
+            i.icon-letter
+            '
+            | Je contacte l'auteur
+          '  
+          | pour lui proposer une musique
+    .opus-detail
+      i.opus-detail-icon.icon-pictures
+      '
+      span.opus-detail-title = t '.sliders', count: @opus.chapters_sliders_length
+      '
+      - if @opus.chapters_sliders_length == 0 && user_signed_in? && current_user.id != @opus.user_id && @opus.user.accepts_contact
+        small.opus-detail-mention
+          a href='#' data-target="#sendmessage" data-toggle="modal" data-action=contact_front_author_path(@opus.user_id) data-recipient-title=@opus.user.title data-recipient-avatar="http://placehold.it/64x64"
+            i.icon-letter
+            '
+            | Je contacte l'auteur
+          '  
+          | pour lui proposer des illustrations
+    
+    .clearfix
+
+    p.opus-detail-keywords
+      |Mots-clés : 
+      - @opus.keywords.each do |keyword|
+        = link_to keyword.label, front_catalog_path(filter: {keyword_id: keyword.id})
+        - unless keyword == @opus.keywords.last
+          |, 
+    
+    h3 Auteurs
+    ul
+      li 
+        = link_to_unless !@opus.user.artist?, "#{@opus.user.title}", front_author_path(@opus.user_id)
+        '
+        - if @opus.author_override? || @opus.author_is_collaborator?
+          | (Créateur)
+        - else
+          | (Auteur)
+      - if @opus.author_override?
+        li
+          = @opus.author_override
+          '
+          | (Auteur)
+      - @opus.collaborations.each do |collaboration|
+        li
+          = link_to_unless !collaboration.user.artist?, "#{collaboration.user.title}", front_author_path(collaboration.user_id)
+          = " (#{collaboration.collaboration_type.label})"
+          
+    - if user_signed_in?
+      h3 Commentaires
+    
+      = form_for [:front, @opus, @comment], html: {class: 'opus-comment media'} do |f|
+        .media-left
+          img.img-circle src=current_user.avatar.url(:mini)
+        .media-body.opus-comment-form
+          p
+            = f.text_area :content, rows: 6, class: 'form-control', placeholder: 'Votre commentaire...'
+          .text-right
+            input.btn.btn-primary type="submit" value="Publier"  
+
+    = render partial: 'comment', collection: @comments
+
+    / v2todo
+    / h3 Vous aimerez auss
+    / .row
+    /   = render partial: 'item', locals: { opus: @opus }
+    /   = render partial: 'item', locals: { opus: @opus }
+    /   = render partial: 'item', locals: { opus: @opus }
+    /   = render partial: 'item', locals: { opus: @opus }
+
+  .col-md-3.text-center
+    - if can_edit(@opus)
+      a.btn.btn-primary.btn-block href=front_opus_path(@opus) Éditer
+
+    - if can_read(@opus.id)
+      - read_label = @opus.atf_experience ? "Lire dans l'espace abonné" : 'Lire'
+      = link_to read_label, read_front_opus_path(@opus.id), class: 'btn btn-primary btn-block'
+    - elsif library_opus(@opus.id)
+      = link_to "Sélectionner un abonnement", front_tarifs_path, class: 'btn btn-primary btn-block'
+    - else
+      - if !@opus.chapters.empty?
+        = link_to "Lire l'extrait", front_preview_product_path(@opus), class: "btn btn-primary btn-block"
+      - if !@opus.atf_experience
+        h3 
+          = number_to_currency @opus.price
+      
+        = link_to front_carts_add_path(@opus.id), class: 'btn btn-primary btn-block' do
+          i.icon-cart
+          |  Acheter à l'unité
+    
+    - if @opus.atf_experience && !library_opus(@opus.id) && agreement_active?
+      = link_to 'Ajouter à ma biblioFeel', front_feellists_add_path(@opus.id), class: 'btn btn-primary btn-block'
+    
+    / v2todo
+    / p
+    /   | ou 
+    /   a href="#"
+    /     | acheter comme cadeau
+
+#shareModal.modal.fade aria-hidden="true" aria-labelledby="shareModal" role="dialog" tabindex="-1" 
+  .modal-dialog
+    .modal-content
+      .modal-header
+        button.close aria-label="Close" data-dismiss="modal" type="button" 
+          span aria-hidden="true"  &times;
+        h4#myModalLabel.modal-title Partager sur les réseaux sociaux
+      .modal-body
+        /-- AddToAny BEGIN
+        div class="a2a_kit a2a_kit_size_32 a2a_default_style"
+          a class="a2a_dd" href="https://www.addtoany.com/share_save"
+          a class="a2a_button_facebook"
+          a class="a2a_button_twitter"
+          a class="a2a_button_google_plus"
+          a class="a2a_button_pinterest"
+        javascript:
+          var a2a_config = a2a_config || {};
+          a2a_config.locale = "fr";
+        script src="//static.addtoany.com/menu/page.js" type="text/javascript" 
+        /!-- AddToAny END
+
+
+= render partial: 'front/commons/author_contact_form'

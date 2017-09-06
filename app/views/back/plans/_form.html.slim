@@ -1,0 +1,22 @@
+- if !plan_exist?(@plan)
+  p Peut seulement être désactiver
+
+= form_for [:back, @plan] do |f|
+  .form-group
+    = f.label :name
+    = f.text_field :name, class: 'form-control', readonly: !plan_exist?(@plan)
+  .form-group
+    = f.label :description
+    = f.text_area :description, class: 'form-control', readonly: !plan_exist?(@plan)
+  .form-group
+    = f.label :cycles
+    = f.number_field :cycles, class: 'form-control', readonly: !plan_exist?(@plan)
+  .form-group
+    = f.label :price
+    = f.number_field :price, class: 'form-control', readonly: !plan_exist?(@plan), step: 'any'
+  .form-group
+    = f.label :visible
+    = radio_button_tag "#{f.object_name}[visible]", true, @plan.visible
+    = radio_button_tag "#{f.object_name}[visible]", false, !@plan.visible
+
+  = f.submit 'Save'

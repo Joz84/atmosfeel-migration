@@ -1,0 +1,127 @@
+.breadcrumb
+  = link_to 'AtmosFeel expérience', front_experience_path
+  i.icon-caret-right
+  | Mon profil
+
+h1 Mon profil
+
+hr
+.row 
+  .col-md-6
+    h3 Mes informations personnelles (ces données ne seront pas visibles des autres utilisateurs)
+
+    = form_for [:front, @user] do |f|
+      .form-group
+        = f.label :firstname do
+          p 
+            span= t('activerecord.attributes.user.firstname')
+            span.text-danger *
+        = f.text_field :firstname, class: 'form-control'
+
+      .form-group
+        = f.label :lastname do
+          p 
+            span= t('activerecord.attributes.user.lastname')
+            span.text-danger *
+        = f.text_field :lastname, class: 'form-control'
+
+      .form-group
+        = f.label :email do
+          p 
+            span= t('activerecord.attributes.user.email')
+            span.text-danger *
+        = f.email_field :email, class: 'form-control'
+
+      .form-group
+        = f.label :phone
+        = f.phone_field :phone, class: 'form-control'
+
+      .form-group
+        = f.label :address
+        = f.text_field :address, class: 'form-control'
+
+      .form-group
+        = f.label :password
+        = f.password_field :password, class: 'form-control'
+
+      .form-group
+        = f.label :password_confirmation
+        = f.password_field :password_confirmation, class: 'form-control'
+
+      .checkbox
+        label
+          = f.check_box :accepts_newsletter
+          = t('activerecord.attributes.user.accepts_newsletter')
+
+      p
+        input.btn.btn-primary type="submit" value="Enregistrer les modifications"
+
+    hr
+
+    h3 Mes coordonnées bancaires
+
+    = link_to 'modifier', front_bank_path, class: 'pull-right'
+
+  
+  .col-md-6
+    .artist class=(@user.artist ? '' : 'hidden') data-user-artist="#{@user.artist ? 1 : 0}"
+      h3 Mon profil visible sur le site
+
+      table.table.table-striped
+        tbody
+          tr
+            td
+              a.abs-right href="#" data-target="#editinfos" data-toggle="modal" modifier
+              .media
+                .media-left 
+                  img.img-thumbnail src="#{@user.avatar.url(:settings_profile)}"
+                .media-body
+                  strong
+                    = @user.title
+                  p 
+                    = truncate @user.resume, length: 100
+
+    .artist-links
+      - if @user.artist?
+        = link_to 'Je ne veux pas être affiché dans la liste des artistes', front_toggle_artist_path 
+      - else
+        p 
+          a href=front_toggle_artist_path Je remplis mon profil public
+          '
+          | (pseudo, avatar, mini bio) pour pouvoir publier sur AtmosFeel
+
+      hr
+    
+    .artist-links
+      - if @user.accepts_contact?
+        = link_to "Je ne souhaite pas être contacté par d'autres artistes", front_toggle_accepts_contact_path
+      - else
+        = link_to "Je souhaite être contacté par d'autres artistes", front_toggle_accepts_contact_path
+
+
+
+#editinfos.modal.fade aria-hidden="true" aria-labelledby="myModalLabel" role="dialog" tabindex="-1" 
+  = form_for @user, url: front_update_profile_path, method: :post do |f|
+
+    .modal-dialog
+      .modal-content
+        .modal-header
+          button.close aria-label="Close" data-dismiss="modal" type="button" 
+            span aria-hidden="true"  &times; Fermer
+          h3.modal-title Modifier mes informations artiste
+        .modal-body
+        
+          .form-group
+            = f.label :nickname
+            = f.text_field :nickname, class: 'form-control'
+            span.text-muted.text-danger Si vous ne renseignez pas de pseudo, vos prénom et nom utilisateur seront visibles sur le site (dans la page Les Artistes).
+          .form-group
+            = f.label :resume
+            = f.text_area :resume, rows: 6, class: 'form-control'
+
+          .form-group
+            = f.label :avatar
+            = f.file_field :avatar, class: 'form-control'
+
+        .modal-footer
+          button.btn.btn-primary type="submit" Enregistrer

@@ -1,0 +1,7 @@
+li.list-group-item.clearfix class=(opus_li_class(opus))
+  = opus.title
+  .btn-group.pull-right
+    = link_to 'Lire', read_back_opus_path(opus), class: 'btn btn-info'
+    = link_to 'Éditer', edit_back_opus_path(opus), class: 'btn btn-primary'
+    = link_to 'Dupliquer', duplicate_back_opus_path(opus), class: 'btn btn-success'
+    = link_to 'Supprimer', back_opus_path(opus), class: 'btn btn-danger', data: {:confirm => 'Are you sure?'}, :method => :delete

@@ -1,0 +1,40 @@
+/ dumb
+- if controller_name == 'orders'
+  - opus_id = opus.opus_id
+- else
+  - opus_id = opus.id
+
+.text-center class=(controller_name == "orders" ? 'col-md-4 col-sm-6' : 'col-md-6')
+  .opus-wrapper
+    = link_to front_product_path(opus_id) do |link|
+
+      - if controller_name == "carts"
+        = link_to front_carts_remove_path(opus.item_id), class: 'delete-item' do 
+          i.icon-minus-square
+
+      = render partial: 'front/commons/opus_cover_mini', locals: {opus: opus}
+      
+      img.opus-mask src=asset_mask_opus
+      .opus-infos
+        i.icon-heart 
+        | (
+        = opus.likes_count
+        |)
+        br
+        - if !opus.atf_experience
+          = number_to_currency opus.price
+      .opus-time
+        = opus.play_time.label.delete(" minutes")
+        |'
+      
+      - if controller_name == "orders"
+        br
+        .order-details
+          = opus.title
+          |Code
+          '
+          = opus.isbn
+          br
+          |Achat le 
+          '
+          = l opus.itemable.created_at, format: :short

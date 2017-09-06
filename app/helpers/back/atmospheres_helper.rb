@@ -1,0 +1,2 @@
+module Back::AtmospheresHelper
+end

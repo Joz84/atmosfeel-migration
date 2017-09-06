@@ -1,0 +1,109 @@
+doctype 5
+html lang="en" ng-app="atmfReader"
+  head
+    meta[charset="utf-8"]
+    meta[http-equiv="X-UA-Compatible" content="IE=edge"]
+    meta[name="viewport" content="width=device-width, initial-scale=1.0"]
+    title
+      | AtmosFeel
+    = stylesheet_link_tag "https://fontastic.s3.amazonaws.com/E2apByVW7PQ3whN87PBTQa/icons.css"
+    = stylesheet_link_tag "reader", media: "all"
+    link href=(asset_path('favicon/favicon.ico')) rel="shortcut icon" type="image/x-icon"
+    = javascript_include_tag "previewer"
+    = csrf_meta_tags
+
+
+  body ng-controller="ReaderController as ctrl" 
+    /! MENU
+    .menu
+      /! PRIMARY
+      a ng-click="toggleMenu()" 
+        i.icon-menu
+      .tooltip-menu ng-class=("{closed : !menuOpen}") 
+        ul
+          li
+            a href="#" scroll-top="" 
+              i.icon-to-top
+              | Retour en haut
+          / li.divider
+          / li
+          /   a.red ng-click="notImplemented()" 
+          /     i.icon-exit
+          /     | Ma bibliothèque
+      .top
+        /! BACK
+        a.reader-btn-back href=opus_path(@opus) ⇦
+
+        /! VOICE
+        a ng-click="toggleVoice()" ng-show="opus.voices_attributes.length > 0"
+          i.icon-voice
+        .tooltip-menu.tooltip-menu-voice ng-class="{closed : !voiceOpen}"
+          ul
+            li ng-repeat="voice in opus.voices_attributes"
+              span ng-hide="voice.$loading" 
+                button ng-click="playVoice($index)" ng-hide="currentVoice == voice" 
+                  i.icon-play
+                button ng-click="pauseVoice()" ng-show="currentVoice == voice" 
+                  i.icon-pause
+              button ng-show="voice.$loading" 
+                img src="http://i.imgur.com/dS4GpWF.gif"
+              h4 ng-bind="voice.title"
+        /! MUSIC
+        a ng-click="toggleMusic()" ng-show="opus.musics_attributes.length > 0"
+          i.icon-music
+        .tooltip-menu.tooltip-menu-music ng-class="{closed : !musicOpen}"
+          ul
+            li ng-repeat="music in opus.musics_attributes"
+              span ng-hide="music.$loading" 
+                button ng-click="playMusic($index)" ng-hide="currentMusic == music" 
+                  i.icon-play
+                button ng-click="pauseMusic()" ng-show="currentMusic == music" 
+                  i.icon-pause
+              button ng-show="music.$loading" 
+                img src="http://i.imgur.com/dS4GpWF.gif"
+              h4 ng-bind="music.title"
+        /! SLIDER
+
+        a ng-click="openSlider($index)" ng-repeat="chapter in opus.chapters_attributes" ng-show="currentChapter == $index && !sliderClicked"
+          i.icon-pictures ng-show="chapter.slider_entries_attributes.length > 0" 
+            span ng-bind="chapter.slider_entries_attributes.length"
+        a.disabled ng-click="" ng-show="currentChapter == -1 && !sliderClicked"
+          i.icon-pictures
+        a ng-click="closeSlider()" ng-show="sliderClicked" 
+          i.icon-text
+    /! SLIDER
+    .slider ng-class="{ active: isSliderOpen[$index] }" ng-click="closeMenus()" ng-repeat="chapter in opus.chapters_attributes" 
+      ul.image rn-carousel="" rn-carousel-indicator="" rn-carousel-swipe=""
+        li[ng-repeat="image in chapter.slider_entries_attributes" ng-style="{ backgroundImage: 'url(' + image.file.url + ')' }"].
+    /! TEXT
+    .text-wrapper ng-click="closeMenus()" class="{{opus.font_family | classify}}"
+      section#cover.cover[data-position="-1" ng-style="{'background-image': 'url('+ opus.cover.url +')', 'color': opus.font_color }"]
+        ul.authors
+          li
+            strong
+              = @opus.user.title
+            ' 
+            span
+              - if @opus.author_override? || @opus.author_is_collaborator?
+                | Créateur
+              - else
+                | Auteur
+          - if @opus.author_override?
+            li
+              strong
+                = @opus.author_override
+              '
+              span
+                | Auteur
+          li ng-repeat="col in opus.collaborations_attributes"
+            strong ng-bind="col.user_attributes.title"
+            '
+            span ng-bind="col.label"
+
+        h1 ng-bind="opus.title"
+      section[data-position="{{$index}}" id="chapter{{$index}}" ng-repeat="chapter in opus.chapters_attributes" ng-style="{'background-image': 'url('+ chapter.background_image.url +')', 'color': chapter.font_color }"]
+        h2.chapter-title ng-bind="chapter.title"
+        .content.chapter-body ng-bind-html="chapter.content" 
+        .shadow[style="{{getBackground(chapter.font_color)}}"]
+
+

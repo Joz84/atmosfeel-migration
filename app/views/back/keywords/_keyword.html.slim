@@ -1,0 +1,5 @@
+li.list-group-item.clearfix
+  = keyword.label
+  .btn-group.pull-right
+    = link_to 'Éditer', edit_back_keyword_path(keyword), class: 'btn btn-primary'
+    = link_to 'Supprimer', back_keyword_path(keyword), class: 'btn btn-danger', data: {:confirm => 'Are you sure?'}, :method => :delete

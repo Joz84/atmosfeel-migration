@@ -1,0 +1,7 @@
+fr:
+  routes:
+    read: lire
+    preview: extrait
+    authors: artistes
+    experience: oeuvres-atmf
+    marketplace: oeuvres-mp

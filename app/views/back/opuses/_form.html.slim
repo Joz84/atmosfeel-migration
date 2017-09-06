@@ -1,0 +1,52 @@
+= form_for [:back, @opus] do |f|
+  .form-group
+    = f.label :flagged, class: 'col-xs-3 control-label'
+    .col-xs-9
+      .radio
+        label
+          = radio_button_tag "#{f.object_name}[flagged]", true, @opus.flagged
+          | oui
+      .radio
+        label
+          = radio_button_tag "#{f.object_name}[flagged]", false, !@opus.flagged
+          | non
+  .form-group
+    = f.label :atf_experience, class: 'col-xs-3 control-label'
+    .col-xs-9
+      .radio
+        label
+          = radio_button_tag "#{f.object_name}[atf_experience]", true, @opus.atf_experience
+          | Présent dans expérience
+      .radio
+        label
+          = radio_button_tag "#{f.object_name}[atf_experience]", false, !@opus.atf_experience
+          | Non présent dans expérience
+  .form-group
+    = f.label :published, class: 'col-xs-3 control-label'
+    .col-xs-9
+      .radio
+        label
+          = radio_button_tag "#{f.object_name}[published]", true, @opus.published
+          '
+          = t "booleans.opus.published.true"
+      .radio
+        label
+          = radio_button_tag "#{f.object_name}[published]", false, !@opus.published
+          '
+          = t "booleans.opus.published.false"
+  .form-group
+    = f.label :selected, class: 'col-xs-3 control-label'
+    .col-xs-9
+      .radio
+        label
+          = radio_button_tag "#{f.object_name}[selected]", true, @opus.selected
+          | Présent
+      .radio
+        label
+          = radio_button_tag "#{f.object_name}[selected]", false, !@opus.selected
+          | Non présent
+  .form-group
+    = f.label :isbn
+    = f.text_field :isbn, class: 'form-control'
+
+  = f.submit 'Save'

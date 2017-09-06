@@ -1,0 +1,5 @@
+fr:
+  routes:
+    front_opuses: bar
+    read_front_opus: lire
+    front_preview_product: extrait

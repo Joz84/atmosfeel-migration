@@ -1,0 +1,25 @@
+h1 Mon panier
+
+
+.row
+  .col-md-3
+    - if !@cart.opuses.empty?
+      h2
+        | Total = 
+        = number_to_currency @cart.total
+      br
+      = link_to 'Valider mon choix', front_carts_confirm_path(@cart.id), class: 'btn btn-primary btn-lg'
+      br
+      br
+      p Le paiement sécurisé PayPlug impose un minimum de 1 €
+      p Le panier à 0 € n'est pas concerné
+
+  .col-md-9.cart-list
+    - if !@cart.opuses.empty?
+      = render partial: '/front/catalog/item', collection: @cart.opuses, as: :opus
+    - else
+      p Votre panier est vide
+
+.row
+  = link_to 'Continuer mes achats', front_root_path, class: 'btn btn-primary btn-lg'
+

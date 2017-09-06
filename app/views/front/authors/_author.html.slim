@@ -1,0 +1,18 @@
+.col-sm-6.col-md-4.col-lg-3.artist-card
+  .media
+    .media-left
+      img.img-circle src=artist.avatar.url(:mini)
+    .media-body
+      h3
+        = artist.title
+      p
+        = link_to "Voir sa fiche", front_author_path(artist.id)
+
+  p 
+    = truncate artist.resume, length: 100
+
+  - if user_signed_in? && current_user.id != artist.id && artist.accepts_contact
+    p
+      a href="#"  data-target="#sendmessage" data-toggle="modal" data-action=contact_front_author_path(artist.id) data-recipient-title=artist.title data-recipient-avatar="http://placehold.it/64x64"
+        i.icon-letter
+        | Lui écrire

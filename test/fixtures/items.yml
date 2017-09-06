@@ -1,0 +1,49 @@
+one: 
+  id: 2
+  opus_id: 1
+  price: 5.95
+  title: Titre de l'œuvre
+  itemable_id: 2
+  itemable_type: Cart
+two:
+  id: 3
+  opus_id: 1
+  price: 5.95
+  title: Titre de l'œuvre
+  itemable_id: 1
+  itemable_type: Order
+three:
+  id: 4
+  opus_id: 2
+  price: 5.95
+  title: Titre de l'œuvre
+  itemable_id: 1
+  itemable_type: Order
+four:
+  id: 5
+  opus_id: 3
+  price: 5.95
+  title: Titre de l'œuvre
+  itemable_id: 2
+  itemable_type: Order
+five:
+  id: 6
+  opus_id: 4
+  price: 5.95
+  title: Titre de l'œuvre
+  itemable_id: 2
+  itemable_type: Order
+six:
+  id: 7
+  opus_id: 10
+  price: 0
+  title: Free
+  itemable_id: 3
+  itemable_type: Cart
+seven:
+  id: 8
+  opus_id: 11
+  price: 3.00
+  title: Free
+  itemable_id: 37
+  itemable_type: Order

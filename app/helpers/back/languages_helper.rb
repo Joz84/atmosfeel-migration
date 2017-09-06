@@ -1,0 +1,2 @@
+module Back::LanguagesHelper
+end

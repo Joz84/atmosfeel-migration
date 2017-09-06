@@ -1,0 +1,70 @@
+#carousel-example-generic.carousel.slide.home-carousel data-ride="carousel" 
+  / ol.carousel-indicators
+  /   li.active data-slide-to="0" data-target="#carousel-example-generic" 
+  /   li data-slide-to="1" data-target="#carousel-example-generic" 
+  /   li data-slide-to="2" data-target="#carousel-example-generic" 
+  .carousel-inner role="listbox" 
+    .item.active
+      = link_to front_tarifs_path do |link|
+        img alt="" src=asset_path('slide1.jpg')
+  / a.left.carousel-control data-slide="prev" href="#carousel-example-generic" role="button" 
+  /   span.glyphicon.glyphicon-chevron-left aria-hidden="true" 
+  /   span.sr-only Précédent
+  / a.right.carousel-control data-slide="next" href="#carousel-example-generic" role="button" 
+  /   span.glyphicon.glyphicon-chevron-right aria-hidden="true" 
+  /   span.sr-only Suivant
+
+.row 
+  .col-sm-9
+    h2 Top œuvres
+
+    .tabs-accordeon
+      ul.tabs
+        li
+          a.selected href="#selection" Notre sélection
+        li
+          a href="#news" Nouveautés
+        li
+          a href="#popular" Les plus populaires
+      .panels
+        .drawer 
+          a href="#selection" Notre sélection
+        #selection.panel-tab
+          .row 
+            - if @selection.size > 0
+              = render partial: 'front/catalog/item', collection: @selection, as: :opus
+            - else
+              p.text-center.text-muted
+                |Pas de sélection aujourd'hui
+        .drawer 
+          a href="#news" Nouveautés
+        #news.panel-tab
+          .row 
+            - if @news.size > 0
+              = render partial: 'front/catalog/item', collection: @news, as: :opus
+            - else
+              p.text-center.text-muted
+                |Pas de nouveautés aujourd'hui
+        .drawer 
+          a href="#popular" Les plus populaires
+        #popular.panel-tab
+          .row 
+            = render partial: 'front/catalog/item', collection: @popularity, as: :opus
+        p.more-opus
+          = link_to 'Toutes les œuvres', front_catalog_path
+
+
+
+
+  .col-sm-3
+    h2 Atmosphères
+
+    ul.atmospheres-list
+      li
+      - @atmospheres.each do |atmosphere|
+        li
+          = link_to atmosphere.label, front_catalog_path(filter: {atmosphere_id: atmosphere.id})
+
+/ Must disapear with the new home with the entire page ?
+/ = link_to front_creez_path do |link|
+/   img.img-content src=asset_path('publiez-vendez.jpg')

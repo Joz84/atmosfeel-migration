@@ -1,0 +1,15 @@
+tr
+  td 
+    strong 
+      = link_to front_opus_path(opus) do 
+        = opus.title
+        small
+          | (détail)
+  td = opus.isbn
+  td = t "booleans.opus.front.published.#{opus.published}"
+  td
+    = t ".sells", count: opus.validated_orders.length
+    | &nbsp; 
+    i.icon-heart
+    | 
+    = opus.likes_count

@@ -1,0 +1,11 @@
+h1 Les utilisateurs
+
+.btn-toolbar
+  .btn-group
+    = link_to 'Ventes', sells_back_users_path, class: 'btn btn-success'
+    = link_to "Vues à partir de l'abonnement", views_back_users_path, class: 'btn btn-info'
+  .btn-group
+    = link_to 'Abonnés newsletter', newsletter_back_users_path, class: 'btn btn-success' 
+
+ul.list-group
+  = render @users

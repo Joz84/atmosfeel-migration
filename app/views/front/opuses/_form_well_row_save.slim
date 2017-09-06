@@ -1,0 +1,12 @@
+.well.row
+  .pull-left
+    a class="btn btn-link" ng-click="previousStep()"
+      i.icon-caret-left
+      = " Étape précedente"
+
+  .pull-right
+    / a class="btn btn-danger" ng-click="debug()"
+    /   | debug
+
+    button class="btn btn-primary" ng-click="saveOpus()"
+      = "Enregistrer"

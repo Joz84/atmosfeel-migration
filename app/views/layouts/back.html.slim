@@ -1,0 +1,43 @@
+doctype 5
+html[lang="en"]
+  head
+    meta[charset="utf-8"]
+    meta[http-equiv="X-UA-Compatible" content="IE=edge"]
+    meta[name="viewport" content="width=device-width, initial-scale=1.0"]
+    meta[name="description" content=""]
+    meta[name="author" content=""]
+    title
+      | AtmosFeel - Back
+    = stylesheet_link_tag "application", media: "all"
+    link href=(asset_path('favicon/favicon.ico')) rel="shortcut icon" type="image/x-icon"
+    = javascript_include_tag "application"
+    = csrf_meta_tags
+  body
+    .navbar.navbar-inverse[role="navigation"]
+      .container
+        .navbar-header
+          = link_to 'AtmosFeel', back_root_path, class: 'navbar-brand'
+        .navbar-collapse.collapse
+          ul.nav.navbar-nav
+            li class=(controller?('back/opuses'))
+              = link_to 'Œuvres', back_opuses_path
+            li class=(controller?('back/users'))
+              = link_to 'Utilisateurs', back_users_path
+            li class=(controller?('back/atmospheres'))
+              = link_to 'Atmosphères', back_atmospheres_path
+            li class=(controller?('back/collaboration_types'))
+              = link_to 'Types de collaboration', back_collaboration_types_path
+            li class=(controller?('back/keywords'))
+              = link_to 'Mots clés', back_keywords_path
+            li class=(controller?('back/play_times'))
+              = link_to 'Durées de lecture', back_play_times_path
+            li class=(controller?('back/languages'))
+              = link_to 'Langues', back_languages_path
+            li class=(controller?('back/discount_codes'))
+              = link_to 'Codes', back_discount_codes_path
+          ul.nav.navbar-nav.pull-right
+            li
+              = link_to 'Se déconnecter', destroy_admin_session_path, :method => :delete 
+
+    .container
+      = yield

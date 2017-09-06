@@ -1,0 +1,10 @@
+var TogglePublishlink = $('#toggle-publish-link');
+<% if @opus.published %>
+  TogglePublishlink.addClass('hidden');
+  TogglePublishlink.removeClass('btn-success');
+<% else %>
+  TogglePublishlink.removeClass('hidden');
+  TogglePublishlink.addClass('btn-success');
+<% end %>
+
+TogglePublishlink.html('<%= escape_javascript "Je publie mon œuvre !" %>')

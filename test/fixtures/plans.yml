@@ -1,0 +1,6 @@
+one: 
+  id: 1
+  name: "12 mois - 9,90€/mois"
+  cycles: 12
+  price: 9.90
+  fixed_id: p1

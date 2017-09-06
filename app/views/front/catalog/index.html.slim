@@ -1,0 +1,54 @@
+.breadcrumb
+  = front_catalog_link
+  i.icon-caret-right
+  | Les œuvres
+
+
+h1= catalog_h1
+
+.col-sm-9.ajax-query-path#catalog(data-ajax-path="#{front_catalog_filter_path}")
+  
+  .opus-sorting
+    a.active href="#" data-order-attr="likes_count" data-order-val="asc"
+      | Popularité
+      i.icon-caret-up
+
+    - if showing_price_sorting?
+      a href="#" data-order-attr="price" data-order-val="asc"
+        | Prix
+        i.icon-caret-up
+
+    a href="#" data-order-attr="published_at" data-order-val="asc"
+      | Date de parution 
+      i.icon-caret-up
+
+  .row#items
+    - if !@opuses.empty? 
+      = render partial: 'item_big', collection: @opuses, as: :opus
+    - else
+      p Aucune œuvre trouvée 
+
+  .opus-pagination.text-right
+    .hidden
+      = paginate @opuses
+
+.col-sm-3.sidebar
+
+  div
+    .row#select-filters
+      .col-xs-6.col-sm-12
+        .row
+          .col-lg-6
+            h4 Atmosphères
+            ul.atmospheres-list
+              li
+                a href="#" data-atmosphere-id="0" class=all_atmosphere_active Toutes 
+              = render partial: 'atmosphere_filter', collection: @atmospheres, as: :atmosphere
+          .col-lg-6
+            h4 Temps de lecture
+            = select :filter, :play_time_id, options_for_select( to_options(@play_times) { |p| [p.label, p.id] }, params_filter_play_time_id), {}, class: 'form-control'
+      .col-xs-6.col-sm-12
+        h4 Langue
+        = select :filter, :language_id, options_for_select( to_options(@languages) { |p| [p.label, p.id] }), {}, class: 'form-control'
+
+

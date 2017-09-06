@@ -1,0 +1,13 @@
+# Copy all needed files
+cp config/example.database.yml config/database.yml
+cp config/example.paypal.yml config/paypal.yml
+cp config/example.payplug_credentials.yml config/payplug_credentials.yml
+cp config/example.secrets.yml config/secrets.yml
+cp config/example.payplug_urls.yml.erb config/payplug_urls.yml.erb
+cp config/example.paypal_urls.yml.erb config/paypal_urls.yml.erb
+cp example.env .env
+
+# Create and setup the database
+# Add fixtures data in the database
+rake db:setup
+rake db:fixtures:load

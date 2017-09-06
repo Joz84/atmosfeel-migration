@@ -1,0 +1,305 @@
+.wrapper
+  .nav-sub
+    // Form Panel Sign in
+    .form-panel.form-panel-sign-in(class=(user_signed_in? ? 'hidden' : ''))
+      .form-panel-btn-close.text-center.link &times;
+
+      // Btn useful only for SM, MD, LG breakpoints
+      .form-panel-col-right.form-panel-sign-in-col-right
+        .form-panel-btn-open.form-panel-sign-in-btn-open.text-center.link.text-uppercase Je me connecte
+
+      .form-panel-col-left
+        .container-fluid
+          .row
+            .col-xs-10.col-xs-offset-1
+              = form_for(@user, url: user_session_path, html: {class: 'form form-horizontal'}) do |f|
+                h3.form-title Se connecter
+                .form-group
+                  label.form-label.control-label.col-sm-4 Adresse email
+                  .col-sm-8
+                    = f.email_field :email, class: 'form-input form-control'
+                    / input.form-input.form-control type="email" placeholder="exemple@exemple.com"
+                .form-group
+                  label.form-label.control-label.col-sm-4 Mot de passe
+                  .col-sm-8
+                    = f.password_field :password, autocomplete: "off", class: "form-input form-control"
+                    / input.form-input.form-control type="password" placeholder="motdepasse"
+                .form-group
+                  .col-sm-offset-4.col-sm-8
+                    .form-checkbox.checkbox
+                      label.form-checkbox-label
+                        = f.check_box :remember_me
+                        / input.form-checkbox-input type="checkbox" /
+                        | Se souvenir de moi
+                .form-group-btn.form-group
+                  .col-sm-offset-4.col-sm-8
+                    button.form-btn.btn.btn-default.btn-block type="submit" Je me connecte
+
+    // Form Panel Search
+    .form-panel.form-panel-search
+      .form-panel-btn-close.text-center.link &times;
+
+      // Btn useful only for SM, MD, LG breakpoints
+      .form-panel-col-right.form-panel-search-col-right
+        .form-panel-btn-open.form-panel-search-btn-open.text-center.link
+
+      .form-panel-col-left.hidden#form-panel-search-container
+        .container-fluid
+          .row
+            .col-xs-10.col-xs-offset-1
+              form.form.form-inline.form-panel-search-form action=front_marketplace_path method='GET'
+                h3.form-title Rechercher
+                .row
+                  .col-xs-9.col-md-10
+                    .form-inline-form-group.form-group
+                      input.form-inline-form-control.form-control.form-input.input-lg type="text" placeholder="Ex : Mot-clef" name='filter[title]'
+                  .col-xs-3.col-md-2
+                    button.form-btn.form-btn-lg.btn.btn-default.btn-lg.btn-block type="submit" Go
+
+  header.header-01
+    .container
+      .row
+        h2.header-01-title.text-center Plongez dans la nouvelle expérience de lecture !
+
+  // Duplicate : Alt Horizontal Nav sub (Buttons only) for XS breakpoint
+  section.nav-sub-alt.visible-xs
+    .container
+      .row
+        .col-xs-12
+          .nav-sub-alt-btns-only.btn-group.btn-group-justified
+            - unless user_signed_in?
+              .btn-group
+                button.nav-sub-alt-btns-only-btn.btn.btn-default.btn-xs#btn-xs-sign-in type="button"
+                  | Je me connecte
+            .btn-group
+              button.nav-sub-alt-btns-only-btn.nav-sub-alt-btns-only-btn-search.btn.btn-default.btn-xs#btn-xs-search type="button"
+                | Rechercher
+
+  header.header-02
+    .container
+      .row
+        .col-sm-12
+          .logo.pull-left
+
+          ul.nav-main.nav.nav-pills.pull-right
+            li.nav-main-item.dropdown
+              a.nav-main-item-link.dropdown-toggle href="#" data-toggle='dropdown'
+                | Les œuvres
+                '
+                span.caret
+              ul.nav-main-dropdown-menu.dropdown-menu
+                li
+                  a.nav-main-item-link href=front_experience_path
+                    = t('front.menu.opuses_experience')
+                li
+                  a.nav-main-item-link href=front_marketplace_path
+                    = t('front.menu.opuses_marketplace')
+            li.nav-main-item
+              a.nav-main-item-link href=front_authors_path Les artistes
+            li.nav-main-separator
+            li.nav-main-item
+              a.nav-main-item-link href=front_ccm_path Comment ça marche
+            li.nav-main-item
+              - if user_signed_in?
+                a.nav-main-item-link href=front_tarifs_path
+                  | Je m'abonne
+              - else
+                a.nav-main-item-link href=new_user_registration_path
+                  | Je m'inscris
+
+          .clearfix
+
+  section.intro
+    .container
+      .row
+        .col-sm-5.col-md-4
+          .intro-main-col
+            .intro-main
+              h2.intro-title.well.well-lg.text-center
+                a.intro-title-link href=front_marketplace_path Selon votre humeur, découvrez la lecture immersive
+
+              .nav-filters.btn-group.btn-group-justified
+                .btn-group
+                  button.nav-filters-btn.btn.btn-default.dropdown-toggle type="button" data-toggle='dropdown'
+                    | Atmosphère
+                    '
+                    span.nav-filters-caret.caret.highlight
+                  ul.nav-filters-dropdown-menu.dropdown-menu
+                    - @atmospheres.each do |atmosphere|
+                      li.nav-filters-dropdown-menu-item
+                        a.nav-filters-dropdown-menu-item-link href=front_marketplace_path(filter: {atmosphere_id: atmosphere.id})
+                          = atmosphere.label
+
+                .btn-group
+                  button.nav-filters-btn.nav-filters-btn-duration.btn.btn-default.dropdown-toggle type="button" data-toggle='dropdown'
+                    | Temps d'évasion
+                    '
+                    span.nav-filters-caret.caret.highlight
+                  ul.nav-filters-dropdown-menu.dropdown-menu
+                    - @play_times.each do |play_time|
+                      li.nav-filters-dropdown-menu-item
+                        a.nav-filters-dropdown-menu-item-link href=front_marketplace_path(filter: {play_time_id: play_time.id})
+                          = play_time.label
+
+        .col-sm-7.col-md-6
+          .intro-illustration
+            a.intro-illustration-link href=front_marketplace_path
+              img.intro-illustration-image.img-responsive.img-rounded src=asset_path('home/intro-illustration.jpg') alt=""
+              small.illustration-credit.pull-right
+                big.c-for-copyright &copy;
+                | Jen Roesch
+
+        .col-sm-7.col-sm-offset-5.col-md-2.col-md-offset-0
+          .intro-social
+            h4.intro-social-title.pull-right Suivez-nous
+
+            ul.nav-social.list-inline.pull-right
+              li.nav-social-item
+                a.nav-social-item-link.nav-social-item-link-facebook href="https://www.facebook.com/atmosfeel" target="_blank"
+              li.nav-social-item
+                a.nav-social-item-link.nav-social-item-link-twitter href="https://twitter.com/atmosfeel_exp" target="_blank"
+              li.nav-social-item
+                a.nav-social-item-link.nav-social-item-link-pinterest href="https://fr.pinterest.com/atmosfeel/" target="_blank"
+              li.nav-social-item-separator.visible-md
+              li.nav-social-item
+                a.nav-social-item-link.nav-social-item-link-instagram href="https://instagram.com/atmosfeel" target="_blank"
+              li.nav-social-item
+                a.nav-social-item-link.nav-social-item-link-tumblr href="http://experienceatmosfeel.tumblr.com" target="_blank"
+              li.nav-social-item
+                a.nav-social-item-link.nav-social-item-link-diver.mailchimp-popup href="#"
+
+            .clearfix
+
+  section.heading-main
+    .container
+      .row
+        .col-md-10.col-md-offset-1
+          h1.heading-main-title.text-center.text-uppercase
+            .heading-main-title-span-01 Découvrez des œuvres littéraires multimédias, en lecture 100% personnalisable,
+            .heading-main-title-span-02 en abonnement en illimité ou en achat à l’unité
+
+  section.opuses-excerpts
+    .container
+      .row
+        .col-sm-12.hidden-xs
+          h2.opuses-excerpts-title.well
+            a.opuses-excerpts-title-link href=front_tarifs_path
+              | Suivez votre inspiration
+              br
+              | Ouvrez grand vos oreilles
+              br
+              | Explorez
+              span.highlight les œuvres en illimité
+
+        - unless @opusTop.nil?
+          .col-sm-6
+            .opuses-excerpts-illustration.opuses-excerpts-illustration-odd
+              a.opuses-excerpts-illustration-link href=opus_path(@opusTop)
+                img.opuses-excerpts-illustration-image.img-responsive.img-rounded src=asset_path('home/opuses-excerpts-illustration-01.jpg') alt=""
+                small.illustration-credit.pull-right
+                  big.c-for-copyright &copy;
+                  | Sophie Venant
+              .opuses-excerpts-sound.opuses-excerpts-odd-sound
+                h4.opuses-excerpts-sound-title-sub.pull-left Extrait en écoute libre
+                .clearfix
+                h5.opuses-excerpts-sound-title.text-center
+                  a.opuses-excerpts-sound-title-link href=front_preview_product_path(@opusTop)
+                    .opuses-excerpts-sound-icon.pull-left
+                    = truncate @opusTop.title, length: 24
+
+        .col-sm-6
+          .opuses-excerpts-illustration.opuses-excerpts-illustration-even
+            a.opuses-excerpts-illustration-link href=front_experience_path
+              img.opuses-excerpts-illustration-image.img-responsive.img-rounded src=asset_path('home/opuses-excerpts-illustration-02.jpg') alt=""
+              small.illustration-credit.pull-right
+                big.c-for-copyright &copy;
+                | Delphine Porré
+
+        // Duplicate : Opuses Excerpts has a special position in XS breakpoint
+        .col-sm-12.visible-xs
+          h2.opuses-excerpts-title.well
+            a.opuses-excerpts-title-link href=front_experience_path
+              | Suivez votre inspiration
+              br
+              | Ouvrez grand vos oreilles
+              br
+              | Explorez
+              span.highlight les œuvres en illimité
+
+        .col-sm-6
+          .opuses-excerpts-illustration.opuses-excerpts-illustration-odd
+            a.opuses-excerpts-illustration-link href=front_experience_path
+              img.opuses-excerpts-illustration-image.img-responsive.img-rounded src=asset_path('home/opuses-excerpts-illustration-03.jpg') alt=""
+              small.illustration-credit.pull-right
+                big.c-for-copyright &copy;
+                | Michel Daubrosse
+
+        - unless @opusBottom.nil?
+          .col-sm-6
+            .opuses-excerpts-illustration.opuses-excerpts-illustration-even
+              a.opuses-excerpts-illustration-link href=opus_path(@opusBottom)
+                img.opuses-excerpts-illustration-image.img-responsive.img-rounded src=asset_path('home/opuses-excerpts-illustration-04.jpg') alt=""
+                small.illustration-credit.pull-right
+                  big.c-for-copyright &copy;
+                  | LM
+              .opuses-excerpts-sound.opuses-excerpts-even-sound
+                h4.opuses-excerpts-sound-title-sub.pull-left Extrait en écoute libre
+                .clearfix
+                h5.opuses-excerpts-sound-title.text-center
+                  a.opuses-excerpts-sound-title-link href=front_preview_product_path(@opusBottom)
+                    .opuses-excerpts-sound-icon.pull-left
+                    = truncate @opusBottom.title, length: 24
+
+  footer.footer-01
+    .container
+      .row
+        .col-sm-12
+          h3.nav-filter-sub-title.text-center.text-uppercase Choisissez votre atmosphère
+
+          .nav-filter-sub-separator.center-block
+
+          ul.nav-filter-sub.list-unstyled.text-center.text-uppercase
+            - @atmospheres.each do |atmosphere|
+              li.nav-filter-sub-item
+                a.nav-filter-sub-item-link href=front_marketplace_path(filter: {atmosphere_id: atmosphere.id})
+                  = atmosphere.label
+
+          .nav-filter-sub-separator.center-block
+
+        .col-sm-12
+          h5.about-title.center-block.text-center ?
+          p.about-paragraph.text-justify AtmosFeel est une offre culturelle et de découverte qui vient combler et enrichir les instants d’attente et de trajet du quotidien. AtmosFeel propose de la lecture de textes enrichis, d’artistes émergents ou issus du domaine public, selon la disponibilité et l’humeur de chacun, en abonnement illimité ou en achat à l’unité. AtmosFeel encourage et provoque la rencontre entre auteurs, illustrateurs, photographes, peintres, musiciens… pour la création d'oeuvres multimédias. Elle leur apporte la visibilité et les promeut, tout en assurant une juste rémunération à chaque contributeur.
+
+  footer.footer-02
+    .container
+      .row
+        .col-sm-12
+          h2.footer-02-title.text-center Créez dans un espace collaboratif où se mêlent l’écriture, la photographie, la musique…
+
+          .nav-osef-separator.center-block
+
+        .row.nav-osef-container
+          .col-xs-6
+            ul.nav-osef.list-unstyled.text-uppercase
+              li.nav-osef-item.pull-right
+                a.nav-osef-item-link href=front_nous_parlons_de_vous_path On parle de nous
+
+              .clearfix
+
+              li.nav-osef-item.pull-right
+                a.nav-osef-item-link href=front_mentions_legales_path Mentions légales
+
+          .col-xs-6
+            ul.nav-osef.list-unstyled.text-uppercase
+              li.nav-osef-item.pull-left
+                a.nav-osef-item-link href=front_about_path
+                  | Qui sommes-nous ?
+
+              .clearfix
+
+              li.nav-osef-item.pull-left
+                a.nav-osef-item-link href=front_cgv_path Conditions Générales de Vente / Utilisation
+
+    small.copyright.pull-right tous droits réservés atmosfeel
+
+    .clearfix

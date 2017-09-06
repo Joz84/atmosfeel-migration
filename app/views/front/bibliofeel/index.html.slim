@@ -1,0 +1,33 @@
+- content_for :opus_body_class, 'experience'
+
+.breadcrumb
+  = link_to 'AtmosFeel', front_root_path
+  i.icon-caret-right
+  | Ma biblioFeel
+
+h1 Ma biblioFeel
+
+div
+  ul.nav.nav-tabs
+    li.active
+      a data-toggle="tab" href="#participated_opuses" Mes créations
+    li
+      a data-toggle="tab" href="#marketplace" Mes achats
+    li
+      a data-toggle="tab" href="#experience" Mes œuvres avec abonnement
+
+  .tab-content#bibliofeel.ajax-query-path(data-ajax-path="/bibliofeel/filter")
+    #participated_opuses.tab-pane.active(data-participated="true" data-new-opus="true")
+      = render partial: 'tab', locals: {opuses: @opuses[:participated_opuses], participated: true, new_opus: true, order_price: true, pagination_id: 'participated_opuses_pagination'}
+
+    #marketplace.tab-pane
+      = render partial: 'tab', locals: {opuses: @opuses[:marketplace], order_price: true, pagination_id: 'marketplace_pagination'}
+
+    #experience.tab-pane(data-remove="true")
+      = render partial: 'tab', locals: {opuses: @opuses[:experience], remove: true, pagination_id: 'experience_pagination'}
+
+
+
+
+
+

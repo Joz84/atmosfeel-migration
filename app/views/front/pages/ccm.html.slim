@@ -1,0 +1,78 @@
+h1 Comment ça marche ?
+
+#accordion.panel-group aria-multiselectable="true"
+  .panel.panel-default
+    #headingOne.panel-heading
+      h4.panel-title
+        a aria-controls="collapseOne" aria-expanded="true" data-parent="#accordion" data-toggle="collapse" href="#collapseOne"
+          | Comment ça marche, l'espace Abonné ?
+    #collapseOne.panel-collapse.collapse aria-labelledby="headingOne"
+      .panel-body
+        h2 Le concept
+
+        p Un abonnement en lecture illimitée, pour vous plonger dans des œuvres multimédias : un texte enrichi de voix, illustrations et parfois de musique
+
+        h2 Ses objectifs
+
+        p Vous faire découvrir des artistes émergents dans des disciplines différentes et aux univers singuliers. Au moins 1 nouvelle œuvre par semaine !
+
+        h2 Son principe : très simple
+
+        ul
+          li
+            | Choisissez la formule d'abonnement qui vous convient, ici :
+            '
+            a href=front_tarifs_path
+              | Je m'abonne
+          li Plongez ! Choisissez une œuvre en fonction de votre temps de lecture disponible, de l'humeur AtmosFeel dans laquelle vous souhaitez vous immerger, etc.
+          li Un résumé et un extrait de chaque œuvre sont là pour vous guider
+          li Laissez un commentaire sur chaque œuvre lue, et en savoir plus sur l'un des artistes.
+          li Créez vos FeelLists, pour retrouver facilement et régulièrement les œuvres qui vous régalent.
+
+  .panel.panel-default
+    #headingTwo.panel-heading
+      h4.panel-title
+        a.collapsed aria-controls="collapseTwo" aria-expanded="false" data-parent="#accordion" data-toggle="collapse" href="#collapseTwo"
+          | Comment ça marche, la plateforme collaborative ?
+    #collapseTwo.panel-collapse.collapse aria-labelledby="headingTwo"
+      .panel-body
+        h2 Le concept
+
+        p Une communauté d'artistes émergents, libres, ambitieux, originaux, talentueux et passionnés, rétribués comme ils le souhaitent.
+
+        h2 Ses objectifs
+
+        p Créer des rencontres artistiques et humaines inattendues, réunir des disciplines qui ne se rencontrent pas toujours.
+
+        h2 Son principe : très simple et l'inscription est gratuite !
+
+        h3 Vous êtes lectrice / lecteur ?
+
+        ul
+          li Choisissez une atmosphère selon votre humeur, une durée de texte, ou piochez au hasard
+          li Lisez le résumé et l'extrait du texte
+          li Vous n'êtes plus qu'à un clic d'acheter et de découvrir une œuvre, un auteur !
+
+        h3 Vous êtes auteur(e) ?
+
+        ul
+          li
+            | Déposez directement votre texte dans la rubrique
+            '
+            a href=new_front_opus_path "Nouvelle création"
+            '
+            | de votre compte.
+          li Rédigez un résumé de votre texte, choisissez l'atmosphère AtmosFeel qui lui convient, fixez le prix et… publiez ! Votre texte est mis en ligne, sans délai.
+          li Vous pourrez être sollicité(e) par des artistes, pour une musique et/ou des illustrations. Vous validez ou non la collaboration
+          li Une fois votre œuvre enrichie, musique et/ou illustrations, vous aurez peut-être la chance d'être choisi pour passer dans la sélection des abonnés.
+
+        h3 Vous êtes photographe ? Musicien ? Peintre ? Illustrateur ?
+
+        ul
+          li Repérez un texte sans musique et/ou sans illustrations.
+          li S'il vous inspire, prenez directement contact avec l'auteur pour proposer votre collaboration
+
+p
+  | Des questions ? N'hésitez pas à nous écrire sur
+  '
+  a href="mailto:bienvenue@atmosfeel.fr" bienvenue@atmosfeel.fr

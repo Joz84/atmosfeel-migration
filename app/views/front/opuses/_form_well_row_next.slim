@@ -1,0 +1,9 @@
+.well.row
+  .pull-left 
+    = link_to :back, class: "btn btn-link" do 
+      i.icon-caret-left
+      = " Retour"
+  .pull-right
+    button class="btn btn-primary" ng-click="nextStep()"
+      = "Étape suivante "
+      i.icon-caret-right

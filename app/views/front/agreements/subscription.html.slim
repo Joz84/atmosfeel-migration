@@ -1,0 +1,43 @@
+.breadcrumb
+  = link_to 'AtmosFeel expérience', front_experience_path
+  i.icon-caret-right
+  | Abonnement mensuel
+
+
+h1 Gérer mon abonnement mensuel
+hr
+
+.alert.alert-success role="alert"
+  strong Félicitations !
+  | Votre formule d'abonnement a été mise à jour.
+
+.row
+  .col-md-6
+    - if @agreement.nil?
+      / todo add target
+      form
+        .form-group
+          label for="formule" Formule choisie
+          select.form-control id="formule"
+            option value="p1" 12 mois - 9,90€/mois
+            option value="p2" 6 mois - 12,90€/mois
+            option value="p3" 1 mois - 15,90€/mois
+
+        / todo
+        / p.text-muted
+        /   |Expire le : 28 septembre 2017
+        / br
+        p
+          strong Date de prélèvement mensuel
+        p
+          = l Time.now, format: :levy
+        br
+        br
+        p
+          input.btn.btn-primary type="submit" value="Enregistrer les modifications"
+    - else
+      p Vous avez sélectionné la formule :
+      p
+        = t "plans.#{@agreement.plan_fixed_id}"
+      p 
+        = l @agreement.end_at, format: :levy

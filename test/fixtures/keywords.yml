@@ -1,0 +1,9 @@
+one:
+  id: 1
+  label: Marseille
+  opuses_count: 1
+
+two:
+  id: 2
+  label: Aigu
+  opuses_count: 1

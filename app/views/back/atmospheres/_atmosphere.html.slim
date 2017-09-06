@@ -1,0 +1,6 @@
+li.list-group-item.clearfix style=atmosphere_style(atmosphere)
+  = atmosphere.label
+  .btn-group.pull-right
+    = link_to 'Éditer', edit_back_atmosphere_path(atmosphere), class: 'btn btn-primary'
+    - if atmosphere.opuses_count == 0
+      = link_to 'Supprimer', back_atmosphere_path(atmosphere), class: 'btn btn-danger', data: {:confirm => 'Are you sure?'}, :method => :delete
