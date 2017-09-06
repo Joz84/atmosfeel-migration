@@ -48,6 +48,6 @@ namespace :deploy do
   end
 end
 
-set :rbenv_ruby, '2.1.1'
+set :rbenv_ruby, '2.3.4'
 
 set :whenever_identifier, ->{ "#{fetch(:application)}_#{fetch(:stage)}" }
