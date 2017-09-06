@@ -35,7 +35,7 @@ rerun.txt
 
 # Rails config files
 /config/secrets.yml
-/config/database.yml
+# /config/database.yml
 
 # Related app files
 /config/payplug_*.yml
@@ -55,3 +55,6 @@ dump.rdb
 ## Mac OS X
 .DS_Store
 ._*
+
+# Ignore application configuration
+/config/application.yml
