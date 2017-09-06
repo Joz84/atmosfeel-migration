@@ -134,4 +134,4 @@ gem 'dotenv-rails', groups: [:development, :test]
 # gem 'debugger', group: [:development, :test]
 gem 'figaro'
 
-
+gem 'rails_12factor'
