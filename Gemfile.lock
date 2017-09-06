@@ -209,6 +209,7 @@ GEM
     minitest (5.10.3)
     multi_json (1.12.2)
     multipart-post (2.0.0)
+    mysql (2.9.1)
     mysql2 (0.3.21)
     nenv (0.3.0)
     net-scp (1.2.1)
@@ -395,6 +396,7 @@ DEPENDENCIES
   jbuilder (~> 2.0)
   kaminari
   mini_magick
+  mysql
   mysql2 (~> 0.3.18)
   newrelic_rpm
   ng-rails-csrf
