@@ -23,7 +23,7 @@ set :deploy_to, '/var/www/atmosfeel'
 # Default value for :pty is false
 # set :pty, true
 
-# Default value for :linked_files is []
+Default value for :linked_files is []
 set :linked_files, fetch(:linked_files, []).push(
   'config/database.yml', 'config/paypal.yml', 'config/payplug_credentials.yml', 'config/payplug_config.yml',
   'config/payplug_urls.yml.erb', 'config/paypal_urls.yml.erb', 'config/newrelic.yml'
