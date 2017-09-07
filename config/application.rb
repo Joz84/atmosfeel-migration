@@ -25,16 +25,16 @@ module Atmosfeel
 
     # prevent ApplicationController from loading all of the helpers
     config.action_controller.include_all_helpers = false
-
+    config.encoding = "utf-8"
     # The default locale is :en and all translations from config/locales/*.rb,yml are auto loaded.
     config.i18n.available_locales = [:fr]
     config.i18n.load_path += Dir[Rails.root.join('config', 'locales', '**', '*.yml').to_s]
     config.i18n.default_locale = :fr
 
     # Remove field_with_error
-    config.action_view.field_error_proc = Proc.new { |html_tag, instance| 
+    config.action_view.field_error_proc = Proc.new { |html_tag, instance|
       html_tag
-    } 
+    }
 
     # Custom generator
     config.generators do |g|
