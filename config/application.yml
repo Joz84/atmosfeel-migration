@@ -11,3 +11,6 @@
 #   stripe_publishable_key: pk_live_9lcthxpSIHbGwmdO941O1XVU
 DB_PWD: 'MySQLPwd'
 JAWSDB_URL: 'mysql://n1jngnngbgmb17ei:blthxk0n3o6tmpy4@sabaik6fx8he7pua.chr7pe7iynqr.eu-west-1.rds.amazonaws.com:3306/rzfko9u15am4esgs'
+
+development:
+  SECRET_KEY_BASE: 9830eb53bc77ec952c49d409352d85c30674c257b45d11bf81c1f6c8268baafdd027690d060c55bbf8614eea427b89126755468f2d39eee014848f316bf211b7
