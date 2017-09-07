@@ -65,4 +65,4 @@ production:
   database: atmosfeel_production
   username: atmosfeel
   password: <%= ENV['DB_PWD'] %>
-  url: <%= ENV['JAWSDB_URL'] %>
+  url: <%= ENV['DATABASE_URL'] %>
