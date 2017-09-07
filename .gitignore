@@ -48,6 +48,7 @@ rerun.txt
 
 # SQL Dumps
 /db/dumps
+atmosfell_2017_08.sql
 
 ### OS temporary files
 dump.rdb
