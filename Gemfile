@@ -3,7 +3,7 @@ ruby '2.3.4'
 source 'https://rubygems.org'
 source 'https://rails-assets.org'
 
-# gem 'mysql'
+gem 'mysql'
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 #gem 'rails', '4.1.8'
 gem 'rails', '4.2.0.rc2'
