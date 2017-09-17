@@ -36,8 +36,8 @@ rerun.txt
 # Rails config files
 # /config/secrets.yml
 # /config/database.yml
-
 /config/application.yml
+
 
 # Related app files
 /config/payplug_*.yml
