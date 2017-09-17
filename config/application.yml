@@ -10,6 +10,8 @@
 #   stripe_api_key: sk_live_EeHnL644i6zo4Iyq4v1KdV9H
 #   stripe_publishable_key: pk_live_9lcthxpSIHbGwmdO941O1XVU
 DB_PWD: 'MySQLPwd'
-DATABASE_URL: 'mysql2://b7e0410ed45712:b5b60d69@eu-cdbr-west-01.cleardb.com/heroku_21e45dbe693b334?reconnect=true'
+
+production:
+  DATABASE_URL: 'mysql2://b7e0410ed45712:b5b60d69@eu-cdbr-west-01.cleardb.com/heroku_21e45dbe693b334?reconnect=true'
 development:
   SECRET_KEY_BASE: 9830eb53bc77ec952c49d409352d85c30674c257b45d11bf81c1f6c8268baafdd027690d060c55bbf8614eea427b89126755468f2d39eee014848f316bf211b7

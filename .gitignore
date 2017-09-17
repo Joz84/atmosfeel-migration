@@ -42,6 +42,7 @@ rerun.txt
 /config/paypal.yml
 /config/paypal_urls.yml.erb
 /config/payplug_urls.yml.erb
+/config/application.yml
 
 # Monitoring
 /config/newrelic.yml
@@ -57,5 +58,3 @@ dump.rdb
 .DS_Store
 ._*
 
-# Ignore application configuration
-/config/application.yml
