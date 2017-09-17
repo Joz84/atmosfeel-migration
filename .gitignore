@@ -37,12 +37,14 @@ rerun.txt
 # /config/secrets.yml
 # /config/database.yml
 
+/config/application.yml
+
 # Related app files
 /config/payplug_*.yml
 /config/paypal.yml
 /config/paypal_urls.yml.erb
 /config/payplug_urls.yml.erb
-/config/application.yml
+
 
 # Monitoring
 /config/newrelic.yml
