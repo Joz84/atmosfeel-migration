@@ -12,7 +12,7 @@ class Front::CatalogController < FrontController
     # else
     #   @opuses = Opus.filter(filter_params.merge({page: 1, atf_experience: opuses_experience_param}))
     # end
-    @opuses = Opus.all.page(params[:page])
+    @opuses = pre_filtered_opuses.page(params[:page])
     @atmospheres = Atmosphere.used
     @play_times = PlayTime.used
     @languages = Language.used
