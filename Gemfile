@@ -135,3 +135,6 @@ gem 'dotenv-rails', groups: [:development, :test]
 gem 'figaro'
 
 gem 'rails_12factor'
+
+gem 'rails-i18n', '~> 4.0.0'
+

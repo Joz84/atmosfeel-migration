@@ -7,11 +7,12 @@ class Front::CatalogController < FrontController
   respond_to :js, only: :filter
 
   def index
-    if params[:filter].nil?
-      @opuses = Opus.filter({page: 1, atf_experience: opuses_experience_param, order_attr: 'likes_count', order_val: 'asc'})
-    else
-      @opuses = Opus.filter(filter_params.merge({page: 1, atf_experience: opuses_experience_param}))
-    end
+    # if params[:filter].nil?
+    #   @opuses = Opus.filter({page: 1, atf_experience: opuses_experience_param, order_attr: 'likes_count', order_val: 'asc'})
+    # else
+    #   @opuses = Opus.filter(filter_params.merge({page: 1, atf_experience: opuses_experience_param}))
+    # end
+    @opuses = pre_filtered_opuses.page(params[:page])
     @atmospheres = Atmosphere.used
     @play_times = PlayTime.used
     @languages = Language.used
@@ -30,7 +31,7 @@ class Front::CatalogController < FrontController
 
   def show
     @opus = Opus.show(params[:id])
-    
+
     if @opus.atf_experience && !params[:controller].include?('front/experience')
       redirect_to front_experience_product_path(@opus.id)
     elsif !@opus.atf_experience && !params[:controller].include?('front/marketplace')
@@ -38,7 +39,7 @@ class Front::CatalogController < FrontController
     end
 
     @comments = @opus.comments.ordered
-    @comment = Comment.new    
+    @comment = Comment.new
   end
 
   private
