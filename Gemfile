@@ -51,7 +51,7 @@ gem 'carrierwave', github: 'carrierwaveuploader/carrierwave'
 gem 'mini_magick'
 
 # Assets
-gem 'rails-assets-bootstrap'
+gem 'rails-assets-bootstrap' #, '3.3.2'
 gem 'rails-assets-jquery-ujs'
 
 # Monitoring
@@ -137,4 +137,6 @@ gem 'figaro'
 gem 'rails_12factor'
 
 gem 'rails-i18n', '~> 4.0.0'
+
+gem 'cloudinary'
 
