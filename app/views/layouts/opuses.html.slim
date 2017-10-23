@@ -46,15 +46,15 @@ html[lang="en"]
                       i.icon-user
                       = "Mon profil"
 
-                    = link_to 'Se déconnecter', destroy_user_session_path, :method => :delete 
+                    = link_to 'Se déconnecter', destroy_user_session_path, :method => :delete
                 .drop-content.text-left
-                  .row 
+                  .row
                     .col-sm-6
                       = link_to "Ma biblioFeel", front_bibliofeel_path
                       = link_to 'Mes œuvres', front_bibliofeel_path, class: 'link-sm'
                       = link_to 'Achats Marketplace', front_bibliofeel_path, class: 'link-sm'
                       = link_to 'Œuvres ajoutées Expérience', front_bibliofeel_path, class: 'link-sm'
-                      
+
                     .col-sm-6
                       a href="#"
                         | Œuvres que j'aime

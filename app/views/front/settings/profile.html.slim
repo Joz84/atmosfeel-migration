@@ -6,28 +6,28 @@
 h1 Mon profil
 
 hr
-.row 
+.row
   .col-md-6
     h3 Mes informations personnelles (ces données ne seront pas visibles des autres utilisateurs)
 
     = form_for [:front, @user] do |f|
       .form-group
         = f.label :firstname do
-          p 
+          p
             span= t('activerecord.attributes.user.firstname')
             span.text-danger *
         = f.text_field :firstname, class: 'form-control'
 
       .form-group
         = f.label :lastname do
-          p 
+          p
             span= t('activerecord.attributes.user.lastname')
             span.text-danger *
         = f.text_field :lastname, class: 'form-control'
 
       .form-group
         = f.label :email do
-          p 
+          p
             span= t('activerecord.attributes.user.email')
             span.text-danger *
         = f.email_field :email, class: 'form-control'
@@ -62,7 +62,7 @@ hr
 
     = link_to 'modifier', front_bank_path, class: 'pull-right'
 
-  
+
   .col-md-6
     .artist class=(@user.artist ? '' : 'hidden') data-user-artist="#{@user.artist ? 1 : 0}"
       h3 Mon profil visible sur le site
@@ -73,25 +73,25 @@ hr
             td
               a.abs-right href="#" data-target="#editinfos" data-toggle="modal" modifier
               .media
-                .media-left 
+                .media-left
                   img.img-thumbnail src="#{@user.avatar.url(:settings_profile)}"
                 .media-body
                   strong
                     = @user.title
-                  p 
+                  p
                     = truncate @user.resume, length: 100
 
     .artist-links
       - if @user.artist?
-        = link_to 'Je ne veux pas être affiché dans la liste des artistes', front_toggle_artist_path 
+        = link_to 'Je ne veux pas être affiché dans la liste des artistes', front_toggle_artist_path
       - else
-        p 
+        p
           a href=front_toggle_artist_path Je remplis mon profil public
           '
           | (pseudo, avatar, mini bio) pour pouvoir publier sur AtmosFeel
 
       hr
-    
+
     .artist-links
       - if @user.accepts_contact?
         = link_to "Je ne souhaite pas être contacté par d'autres artistes", front_toggle_accepts_contact_path
@@ -99,18 +99,17 @@ hr
         = link_to "Je souhaite être contacté par d'autres artistes", front_toggle_accepts_contact_path
 
 
-
-#editinfos.modal.fade aria-hidden="true" aria-labelledby="myModalLabel" role="dialog" tabindex="-1" 
+#editinfos.modal.fade aria-hidden="true" aria-labelledby="myModalLabel" role="dialog" tabindex="-1"
   = form_for @user, url: front_update_profile_path, method: :post do |f|
 
     .modal-dialog
       .modal-content
         .modal-header
-          button.close aria-label="Close" data-dismiss="modal" type="button" 
+          button.close aria-label="Close" data-dismiss="modal" type="button"
             span aria-hidden="true"  &times; Fermer
           h3.modal-title Modifier mes informations artiste
         .modal-body
-        
+
           .form-group
             = f.label :nickname
             = f.text_field :nickname, class: 'form-control'

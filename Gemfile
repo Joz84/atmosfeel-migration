@@ -47,7 +47,7 @@ gem 'devise'
 gem "simple_token_authentication"
 
 # Upload
-gem 'carrierwave', github: 'carrierwaveuploader/carrierwave'
+gem 'carrierwave', '0.11.2' #, github: 'carrierwaveuploader/carrierwave'
 gem 'mini_magick'
 
 # Assets
@@ -137,4 +137,6 @@ gem 'figaro'
 gem 'rails_12factor'
 
 gem 'rails-i18n', '~> 4.0.0'
+
+gem 'cloudinary'
 
