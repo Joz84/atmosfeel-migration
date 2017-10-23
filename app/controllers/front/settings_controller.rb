@@ -1,7 +1,7 @@
 class Front::SettingsController < FrontController
   layout 'opuses'
 
-  before_filter :set_bank_detail, only: [:bank, :update_bank]  
+  before_filter :set_bank_detail, only: [:bank, :update_bank]
 
   def profile
     @user = current_user

@@ -6,15 +6,6 @@ GIT
       capistrano (>= 3.1)
       sshkit (>= 1.2.0)
 
-GIT
-  remote: git://github.com/carrierwaveuploader/carrierwave.git
-  revision: c0ae645fe8c0dc9169b312eb84cd963d79885e77
-  specs:
-    carrierwave (1.1.0)
-      activemodel (>= 4.0.0)
-      activesupport (>= 4.0.0)
-      mime-types (>= 1.16)
-
 GEM
   remote: https://rubygems.org/
   remote: https://rails-assets.org/
@@ -88,6 +79,12 @@ GEM
       capistrano
       sidekiq (>= 3.4)
     capistrano-stats (1.1.1)
+    carrierwave (0.11.2)
+      activemodel (>= 3.2.0)
+      activesupport (>= 3.2.0)
+      json (>= 1.7)
+      mime-types (>= 1.16)
+      mimemagic (>= 0.3.0)
     chronic (0.10.2)
     cloudinary (1.1.7)
       aws_cf_signer
@@ -212,6 +209,7 @@ GEM
     mime-types (3.1)
       mime-types-data (~> 3.2015)
     mime-types-data (3.2016.0521)
+    mimemagic (0.3.2)
     mini_magick (4.8.0)
     mini_portile2 (2.2.0)
     minitest (5.10.3)
@@ -402,7 +400,7 @@ DEPENDENCIES
   capistrano-secrets-yml
   capistrano-sidekiq
   capistrano-unicorn-nginx!
-  carrierwave!
+  carrierwave (= 0.11.2)
   cloudinary
   coffee-rails (~> 4.0.0)
   deep_cloneable

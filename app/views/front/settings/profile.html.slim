@@ -99,10 +99,6 @@ hr
         = link_to "Je souhaite être contacté par d'autres artistes", front_toggle_accepts_contact_path
 
 
-button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModal" Launch demo modal
-
-= render "form"
-
 #editinfos.modal.fade aria-hidden="true" aria-labelledby="myModalLabel" role="dialog" tabindex="-1"
   = form_for @user, url: front_update_profile_path, method: :post do |f|
 
