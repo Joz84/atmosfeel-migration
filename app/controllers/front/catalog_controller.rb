@@ -20,7 +20,7 @@ class Front::CatalogController < FrontController
 
   def filter
     @replace_items = presentation_params[:replace_items] == 'true'
-    @opuses = Opus.filter(filter_params.merge({atf_experience: opuses_experience_param}))
+    @opuses = Opus.all #filter(filter_params.merge({atf_experience: opuses_experience_param}))
   end
 
   def flag
