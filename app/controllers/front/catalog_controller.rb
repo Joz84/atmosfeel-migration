@@ -12,7 +12,8 @@ class Front::CatalogController < FrontController
     # else
     #   @opuses = Opus.filter(filter_params.merge({page: 1, atf_experience: opuses_experience_param}))
     # end
-    @opuses = pre_filtered_opuses.page(params[:page])
+
+    @opuses = pre_filtered_opuses.order(created_at: :desc).page(params[:page])
     @atmospheres = Atmosphere.used
     @play_times = PlayTime.used
     @languages = Language.used
@@ -20,7 +21,7 @@ class Front::CatalogController < FrontController
 
   def filter
     @replace_items = presentation_params[:replace_items] == 'true'
-    @opuses = Opus.all #filter(filter_params.merge({atf_experience: opuses_experience_param}))
+    @opuses = pre_filtered_opuses.order(created_at: :desc).page(params[:page]) #Opus.filter(filter_params.merge({atf_experience: opuses_experience_param}))
   end
 
   def flag
