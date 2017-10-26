@@ -142,4 +142,4 @@ gem 'cloudinary'
 
 # gem 'carrierwave-audio'
 
-gem 'faraday'
+# gem 'faraday'
