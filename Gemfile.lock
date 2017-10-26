@@ -408,6 +408,7 @@ DEPENDENCIES
   dotenv-rails
   elasticsearch-model
   elasticsearch-rails
+  faraday
   figaro
   foreman
   guard-bundler
