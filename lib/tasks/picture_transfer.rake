@@ -76,9 +76,14 @@ task :voice_file_transfer => :environment do
       # photo_name = voice.file.file.filename
       # url = "../atmosfeel-uploads/voice/file/#{id}/#{photo_name}"
       identifier = voice.file.file.identifier
-      url = "http://res.cloudinary.com/atmosfeel/video/upload/#{identifier}"
-      voice.remote_file_url = url
-      voice.save
+      if identifier[0..4] != "video"
+        url = "http://res.cloudinary.com/atmosfeel/video/upload/#{identifier}"
+        voice.remote_file_url = url
+        puts "id: #{id}"
+        puts voice.save
+        puts "========="
+        puts ""
+      end
     end
   end
 end
