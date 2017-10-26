@@ -72,7 +72,7 @@ desc "This task transfer the file voice to cloudinary"
 task :voice_file_transfer => :environment do
   Voice.all.each do |voice|
     id = voice.id
-    if voice.file.file# && id > 129#!= 23. 129 et 23 lost
+    if voice.file.file && id != 129 && != 23
       # photo_name = voice.file.file.filename
       # url = "../atmosfeel-uploads/voice/file/#{id}/#{photo_name}"
       identifier = voice.file.file.identifier
