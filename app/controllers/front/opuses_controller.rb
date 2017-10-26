@@ -72,7 +72,7 @@ class Front::OpusesController < FrontController
 
   private
 
-  # lib/devise/controllers/helpers 
+  # lib/devise/controllers/helpers
   def authenticate_user_or_admin!(opts={})
     opts[:scope] = admin_signed_in? ? :admin : :user
     warden.authenticate!(opts) if !devise_controller? || opts.delete(:force)
@@ -128,10 +128,10 @@ class Front::OpusesController < FrontController
   def sanitized_opus_params
     opus_params_copy = opus_params
     if !opus_params_copy[:keyword_opuses_attributes].nil?
-      opus_params_copy[:keyword_opuses_attributes] = opus_params_copy[:keyword_opuses_attributes].uniq { |keyword_opus| 
-        keyword_opus[:keyword_id] 
+      opus_params_copy[:keyword_opuses_attributes] = opus_params_copy[:keyword_opuses_attributes].uniq { |keyword_opus|
+        keyword_opus[:keyword_id]
       }
-      opus_params_copy[:keyword_opuses_attributes] = opus_params_copy[:keyword_opuses_attributes].delete_if {|keyword_opus| 
+      opus_params_copy[:keyword_opuses_attributes] = opus_params_copy[:keyword_opuses_attributes].delete_if {|keyword_opus|
         keyword_opus.empty? || keyword_opus.values.any? {|x| x.nil?}
       }
     end

@@ -68,3 +68,16 @@ task :music_file_transfer => :environment do
   end
 end
 
+desc "This task transfer the file voice to cloudinary"
+task :voice_file_transfer => :environment do
+  Voice.all.each do |voice|
+    id = voice.id
+    if voice.file.file# && id > 129#!= 23. 129 et 23 lost
+      photo_name = voice.file.file.filename
+      url = "../atmosfeel-uploads/voice/file/#{id}/#{photo_name}"
+      voice.remote_file_url = url
+      voice.save
+    end
+  end
+end
+

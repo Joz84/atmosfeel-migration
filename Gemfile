@@ -140,6 +140,6 @@ gem 'rails-i18n', '~> 4.0.0'
 
 gem 'cloudinary'
 
-# gem 'carrierwave-audio'
+gem 'mime-types', require: 'mime/types/full'
 
-gem 'faraday'
+# gem 'carrierwave-audio'

@@ -408,7 +408,6 @@ DEPENDENCIES
   dotenv-rails
   elasticsearch-model
   elasticsearch-rails
-  faraday
   figaro
   foreman
   guard-bundler
@@ -418,6 +417,7 @@ DEPENDENCIES
   guard-sidekiq
   jbuilder (~> 2.0)
   kaminari
+  mime-types
   mini_magick
   mysql2 (~> 0.3.18)
   newrelic_rpm
