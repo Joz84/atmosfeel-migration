@@ -73,8 +73,10 @@ task :voice_file_transfer => :environment do
   Voice.all.each do |voice|
     id = voice.id
     if voice.file.file# && id > 129#!= 23. 129 et 23 lost
-      photo_name = voice.file.file.filename
-      url = "../atmosfeel-uploads/voice/file/#{id}/#{photo_name}"
+      # photo_name = voice.file.file.filename
+      # url = "../atmosfeel-uploads/voice/file/#{id}/#{photo_name}"
+      identifier = voice.file.file.identifier
+      url = "http://res.cloudinary.com/atmosfeel/video/upload/#{identifier}"
       voice.remote_file_url = url
       voice.save
     end
