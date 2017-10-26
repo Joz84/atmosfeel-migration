@@ -36,19 +36,14 @@ class Front::OpusesController < FrontController
 
   def create
     @opus = Opus.new(sanitized_opus_params)
-    puts "Opus new ca marche ----"
     @opus.user = current_user
 
     if @opus.save
-      puts "Opus save ca marche ----"
       render json: @opus
     else
-      puts "Opus don't save ca marche ----"
       if Rails.env.development?
-        puts "Env dev ca marche ----"
         render text: @opus.errors.inspect
       else
-        puts "Env no dev ca marche ----"
         render json: '', status: 400
       end
     end
@@ -110,12 +105,10 @@ class Front::OpusesController < FrontController
     @play_times  = PlayTime.all
     @languages = Language.all
     @collaboration_types = CollaborationType.all
-    puts "set resource ca marche ----"
   end
 
   def set_opus
     @opus = Opus.find(params[:id])
-    puts "set opus ca marche ----"
   end
 
   def opus_params
