@@ -3,7 +3,7 @@ require 'elasticsearch/model'
 class Opus < ActiveRecord::Base
   include LocalUpload
   include PriceAttr
-  include Elasticsearch::Model
+  # include Elasticsearch::Model
 
   mount_uploader :cover, CoverUploader
 
@@ -38,19 +38,19 @@ class Opus < ActiveRecord::Base
   after_save :set_isbn
   after_create :set_first_published_opus_on_creator
 
-  after_commit on: [:create] do
-    logger.info 'created'
-    __elasticsearch__.index_document
-  end
+  # after_commit on: [:create] do
+  #   logger.info 'created'
+  #   __elasticsearch__.index_document
+  # end
 
-  after_commit on: [:update] do
-    logger.info 'update'
-    __elasticsearch__.index_document refresh: true
-  end
+  # after_commit on: [:update] do
+  #   logger.info 'update'
+  #   __elasticsearch__.index_document refresh: true
+  # end
 
-  after_commit on: [:destroy] do
-    __elasticsearch__.delete_document
-  end
+  # after_commit on: [:destroy] do
+  #   __elasticsearch__.delete_document
+  # end
 
   # Tell to LocalUpload Module which attribute is used by carrierwave
   alias_attribute :carrierwave_attr, :cover
@@ -62,34 +62,34 @@ class Opus < ActiveRecord::Base
   scope :experience, -> { where(atf_experience: true)}
   scope :marketplace, -> { where(atf_experience: false)}
 
-  settings index: {
-    analysis: {
-      filter: {
-        substring: {
-          type: 'edge_ngram',
-          min_gram: 1,
-          max_gram: 10
-        }
-      },
-      analyzer: {
-        autocomplete: {
-          type: 'custom',
-          tokenizer: 'standard',
-          filter: %w(lowercase substring)
-        }
-      }
-    }
-  } do
-    mapping do
-      indexes :title, analyzer: 'autocomplete', search_analyzer: 'standard'
-      indexes :keywords_list, analyzer: 'autocomplete', search_analyzer: 'standard'
-      indexes :user,
-        type: 'object',
-        properties: {
-          title: {type: 'string', analyzer: 'autocomplete', search_analyzer: 'standard'}
-        }
-    end
-  end
+  # settings index: {
+  #   analysis: {
+  #     filter: {
+  #       substring: {
+  #         type: 'edge_ngram',
+  #         min_gram: 1,
+  #         max_gram: 10
+  #       }
+  #     },
+  #     analyzer: {
+  #       autocomplete: {
+  #         type: 'custom',
+  #         tokenizer: 'standard',
+  #         filter: %w(lowercase substring)
+  #       }
+  #     }
+  #   }
+  # } do
+  #   mapping do
+  #     indexes :title, analyzer: 'autocomplete', search_analyzer: 'standard'
+  #     indexes :keywords_list, analyzer: 'autocomplete', search_analyzer: 'standard'
+  #     indexes :user,
+  #       type: 'object',
+  #       properties: {
+  #         title: {type: 'string', analyzer: 'autocomplete', search_analyzer: 'standard'}
+  #       }
+  #   end
+  # end
 
   def self.fonts
     [
