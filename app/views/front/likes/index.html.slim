@@ -19,18 +19,18 @@ h1
       i.icon-caret-up
 
     a href="#" data-order-attr="published_at" data-order-val="asc"
-      | Date de parution 
+      | Date de parution
       i.icon-caret-up
 
   .row#items
-    - if !@opuses.empty? 
+    - if !@opuses.empty?
       = render partial: 'front/catalog/item_big', collection: @opuses, as: :opus
     - else
       p je n'aime aucune œuvre pour le moment.
 
   .opus-pagination.text-right
-    .hidden
-      = paginate @opuses
+    / .hidden
+    = paginate @opuses
 
 .col-sm-3.sidebar
 
@@ -42,7 +42,7 @@ h1
             h4 Atmosphères
             ul.atmospheres-list
               li
-                a.active href="#" data-atmosphere-id="0" Toutes 
+                a.active href="#" data-atmosphere-id="0" Toutes
               = render partial: '/front/catalog/atmosphere_filter', collection: @atmospheres, as: :atmosphere
           .col-lg-6
             h4 Temps de lecture
