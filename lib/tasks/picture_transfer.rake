@@ -70,7 +70,7 @@ end
 
 desc "This task transfer the file voice to cloudinary"
 task :music_file_transfer => :environment do
-  music.all.each do |music|
+  Music.all.each do |music|
     id = music.id
     if music.file.file && id != 129 && id != 23
       # photo_name = music.file.file.filename
@@ -79,7 +79,9 @@ task :music_file_transfer => :environment do
       if identifier[0..4] != "video"
         url = "https://res.cloudinary.com/atmosfeel/video/upload/#{identifier}"
         music.remote_file_url = url
+        puts "========="
         puts "id: #{id}"
+        puts url
         puts music.save
         puts "========="
         puts ""
