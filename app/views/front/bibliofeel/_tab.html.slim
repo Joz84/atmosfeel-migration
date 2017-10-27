@@ -1,12 +1,12 @@
 - participated ||= false
-- remove ||= false 
+- remove ||= false
 - new_opus ||= false
 - order_price ||= false
 
 - if opuses.length > 0
 
   .col-sm-9
-    
+
     .opus-sorting
       a.active href="#" data-order-attr="likes_count" data-order-val="asc"
         | Popularité
@@ -18,18 +18,18 @@
           i.icon-caret-up
 
       a href="#" data-order-attr="published_at" data-order-val="asc"
-        | Date de parution 
+        | Date de parution
         i.icon-caret-up
 
-    .row.items 
+    .row.items
       = render partial: 'item_big', collection: opuses, as: :opus, locals: {participated: participated, remove: remove}
 
     .opus-pagination.text-right(id=pagination_id)
-      .hidden
-        = paginate opuses
+      / .hidden
+      = paginate opuses
 
     - if new_opus
-      .row 
+      .row
         .col-sm-12
           a.btn.btn-primary.btn-xl href=new_front_opus_path Nouvelle création
 
@@ -43,7 +43,7 @@
               h4 Atmosphères
               ul.atmospheres-list
                 li
-                  a.active href="#" data-atmosphere-id="0" Toutes 
+                  a.active href="#" data-atmosphere-id="0" Toutes
                 = render partial: '/front/catalog/atmosphere_filter', collection: @atmospheres, as: :atmosphere
             .col-lg-6
               h4 Temps de lecture

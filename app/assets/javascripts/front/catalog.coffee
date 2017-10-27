@@ -24,7 +24,7 @@ $(document).ready ->
   if isCatalog() or isBiblioFeel() or isLikes()
     ajaxQueryPath = $('.ajax-query-path').data('ajax-path')
 
-    
+
     lastSorting = $('.opus-sorting a.active').data('order-attr')
 
     dataValue = (identifier, dataAttribute)->
@@ -74,7 +74,7 @@ $(document).ready ->
       orderVal = dataValue('.opus-sorting a.active', 'order-val')
       title = $('.used-search-filter').val()
 
-      page = $('#current-page').val() if page is 0 
+      page = $('#current-page').val() if page is 0
 
       filterObject = {
         filter:
@@ -94,11 +94,11 @@ $(document).ready ->
           presentation:
             replace_items: replaceItems
           extra:
-            current_tab: $('.tab-pane.active').attr('id') 
+            current_tab: $('.tab-pane.active').attr('id')
             remove: dataValue('.tab-pane.active', 'remove')
             participated: dataValue('.tab-pane.active', 'participated')
           filter: filterObject.filter
-          
+
       ).done ->
         replaceHistoryState(filterObject) if isCatalog() or isLikes()
 

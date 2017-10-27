@@ -55,18 +55,39 @@ task :slider_entry_file_transfer => :environment do
   end
 end
 
-desc "This task transfer the file music to cloudinary"
+# desc "This task transfer the file music to cloudinary"
+# task :music_file_transfer => :environment do
+#   Music.all.each do |music|
+#     if music.file.file
+#       id = music.id
+#       photo_name = music.file.file.filename
+#       url = "../atmosfeel-uploads/music/file/#{id}/#{photo_name}"
+#       music.remote_file_url = url
+#       music.save
+#     end
+#   end
+# end
+
+desc "This task transfer the file voice to cloudinary"
 task :music_file_transfer => :environment do
-  Music.all.each do |music|
-    if music.file.file
-      id = music.id
-      photo_name = music.file.file.filename
-      url = "../atmosfeel-uploads/music/file/#{id}/#{photo_name}"
-      music.remote_file_url = url
-      music.save
+  music.all.each do |music|
+    id = music.id
+    if music.file.file && id != 129 && id != 23
+      # photo_name = music.file.file.filename
+      # url = "../atmosfeel-uploads/music/file/#{id}/#{photo_name}"
+      identifier = music.file.file.identifier
+      if identifier[0..4] != "video"
+        url = "http://res.cloudinary.com/atmosfeel/video/upload/#{identifier}"
+        music.remote_file_url = url
+        puts "id: #{id}"
+        puts music.save
+        puts "========="
+        puts ""
+      end
     end
   end
 end
+
 
 desc "This task transfer the file voice to cloudinary"
 task :voice_file_transfer => :environment do
