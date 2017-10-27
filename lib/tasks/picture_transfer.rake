@@ -77,7 +77,7 @@ task :music_file_transfer => :environment do
       # url = "../atmosfeel-uploads/music/file/#{id}/#{photo_name}"
       identifier = music.file.file.identifier
       if identifier[0..4] != "video"
-        url = "http://res.cloudinary.com/atmosfeel/video/upload/#{identifier}"
+        url = "https://res.cloudinary.com/atmosfeel/video/upload/#{identifier}"
         music.remote_file_url = url
         puts "id: #{id}"
         puts music.save
