@@ -4,7 +4,7 @@ module Api::V1
     protect_from_forgery :except => :index
 
     def index
-      @bibliofeel = current_user.opuses.filter(bibliofeel_params)
+      @bibliofeel = current_user.opuses #.filter(bibliofeel_params)
     end
 
     private

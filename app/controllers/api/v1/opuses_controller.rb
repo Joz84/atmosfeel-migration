@@ -8,7 +8,7 @@ module Api::V1
 
     def index
       @user = User.find_by_email(request.headers["HTTP_X_USER_EMAIL"])
-      @opuses = Opus.filter(opus_params)
+      @opuses = Opus.all #filter(opus_params)
     end
 
     def show
