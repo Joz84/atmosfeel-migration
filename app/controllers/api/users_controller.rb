@@ -1,6 +1,6 @@
 class Api::UsersController < ApiController
   def filter
-    render json: User.artist.filter(user_params)
+    render json: User.artist.all # filter(user_params)
   end
 
   private
