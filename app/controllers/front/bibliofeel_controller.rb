@@ -1,6 +1,6 @@
 class Front::BibliofeelController < FrontController
   include OwnedOpuses
-  
+
   # layout 'opuses'
 
   respond_to :js, only: :filter
@@ -13,9 +13,9 @@ class Front::BibliofeelController < FrontController
     library_entries_opuses_ids = current_user.library_entries_opuses_ids
 
     @opuses = {}
-    @opuses[:participated_opuses] = Opus.filter({id: participated_opuses_ids, page: 1, order_attr: 'likes_count', order_val: 'asc'})
-    @opuses[:marketplace]         = Opus.filter({id: owned_opuses_ids, page: 1, order_attr: 'likes_count', order_val: 'asc'})
-    @opuses[:experience]          = Opus.filter({id: library_entries_opuses_ids, page: 1, order_attr: 'likes_count', order_val: 'asc'})
+    @opuses[:participated_opuses] = current_user.opuses.page(params[:page]) # Opus.filter({id: participated_opuses_ids, page: 1, order_attr: 'likes_count', order_val: 'asc'})
+    @opuses[:marketplace]         = current_user.opuses.page(params[:page]) # Opus.filter({id: owned_opuses_ids, page: 1, order_attr: 'likes_count', order_val: 'asc'})
+    @opuses[:experience]          = current_user.opuses.page(params[:page]) # Opus.filter({id: library_entries_opuses_ids, page: 1, order_attr: 'likes_count', order_val: 'asc'})
     @atmospheres = Atmosphere.used
     @play_times = PlayTime.used
     @keywords = Keyword.used
@@ -29,7 +29,7 @@ class Front::BibliofeelController < FrontController
       opuses = current_user.owned_opuses_ids
     elsif extra_params[:current_tab] == 'experience'
       opuses = current_user.library_entries_opuses_ids
-    end  
+    end
 
     @replace_items      = presentation_params[:replace_items] == 'true'
     @participated       = extra_params[:participated] == 'true' ? true : false
@@ -43,7 +43,7 @@ class Front::BibliofeelController < FrontController
     library_entry = LibraryEntry.find_by(feellist_id: feellist.id, opus_id: params[:id])
     library_entry.destroy
 
-    redirect_to front_bibliofeel_path    
+    redirect_to front_bibliofeel_path
   end
 
   def leave
