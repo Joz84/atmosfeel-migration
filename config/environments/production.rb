@@ -63,7 +63,7 @@ Rails.application.configure do
     address: 'smtp.mandrillapp.com',
     port: 587,
     user_name: 'ATMOSFEEL',
-    password: '4TonJYqehPf4pc519mxScg',
+    password: ENV['MAIL_CHIMP_URL'],
     authentication: :plain
   }
   # Set this to true and configure the email server for immediate delivery to raise delivery errors.
