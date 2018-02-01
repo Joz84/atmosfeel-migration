@@ -143,8 +143,8 @@
 
         .col-sm-7.col-md-6
           .intro-illustration
-            a.intro-illustration-link href=front_marketplace_path
-              img.intro-illustration-image.img-responsive.img-rounded src=asset_path('home/intro-illustration.jpg') alt=""
+            a.intro-illustration-link href=( User.where(id: 281).any? ? front_author_path(281) : front_marketplace_path)
+              img.intro-illustration-image.img-responsive.img-rounded src=asset_path('home/atmosfeel-homepage.png') alt=""
               small.illustration-credit.pull-right
                 big.c-for-copyright &copy;
                 | Jen Roesch
