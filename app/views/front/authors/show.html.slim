@@ -12,7 +12,7 @@ h1
         .col-md-6
           h5.artist-detail-opuses-title
             / = t('front.menu.experience')
-            Œuvres sélectionnées par AtmosFeel
+            = "Œuvres sélectionnées par AtmosFeel"
           ul.list-unstyled.artist-detail-opuses-list
             - @experience_opuses.each do |opus|
               li
@@ -23,7 +23,7 @@ h1
         .col-md-6
           h5.artist-detail-opuses-title
             / = t('front.menu.marketplace')
-            Œuvres auto-publiées par des indépendants
+            = "Œuvres auto-publiées par des indépendants"
           ul.list-unstyled.artist-detail-opuses-list
             - @marketplace_opuses.each do |opus|
               li
