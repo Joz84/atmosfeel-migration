@@ -75,7 +75,7 @@ fr:
         like:
           attributes:
             opus_id:
-              taken: "déjà utilisé"      
+              taken: "déjà utilisé"
   paypal:
     agreement_description: "%{agreement} pour %{description} - %{price}"
   number:

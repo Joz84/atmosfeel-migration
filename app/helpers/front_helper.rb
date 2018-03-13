@@ -30,7 +30,7 @@ module FrontHelper
     if session[:cart_id].nil?
       0
     else
-      begin 
+      begin
         cart = Cart.find_with_opuses(session[:cart_id])
         cart.opuses.length
       rescue ActiveRecord::RecordNotFound
@@ -44,7 +44,8 @@ module FrontHelper
   end
 
   def front_catalog_link(params={})
-    link_to t('front.menu.opuses_experience'), front_catalog_path(params)
+    # link_to t('front.menu.experience'), front_catalog_path(params)
+    link_to "Œuvres sélectionnées par AtmosFeel", front_catalog_path(params)
   end
 
   def front_product_path(params={})
@@ -70,7 +71,7 @@ module FrontHelper
   def params_filter_play_time_id
     params.has_key?(:filter) && !params[:filter].nil? ? (params[:filter][:play_time_id].nil? ? '' : params[:filter][:play_time_id]) : ''
   end
-  
+
   private
 
   def asset_mask_diamond_path

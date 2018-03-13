@@ -13,14 +13,15 @@ module Front::MarketplaceHelper
 
   def catalog_h1
     'Les œuvres auto-publiées'
-  end 
+  end
 
   def front_catalog_path(params={})
     front_marketplace_path(params)
   end
 
   def front_catalog_link(params={})
-    link_to t('front.menu.opuses_marketplace'), front_catalog_path(params)
+    # link_to t('front.menu.marketplace'), front_catalog_path(params)
+    link_to "Œuvres auto-publiées par des indépendants", front_catalog_path(params)
   end
 
   def front_product_path(params={})
