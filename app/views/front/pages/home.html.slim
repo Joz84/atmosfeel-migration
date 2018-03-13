@@ -147,9 +147,9 @@
           .intro-illustration
             a.intro-illustration-link href=( User.where(id: 281).any? ? front_author_path(281) : front_marketplace_path)
               img.intro-illustration-image.img-responsive.img-rounded src=asset_path('home/atmosfeel-homepage.png') alt=""
-              small.illustration-credit.pull-right
-                big.c-for-copyright &copy;
-                | Jen Roesch
+              / small.illustration-credit.pull-right
+              /   big.c-for-copyright &copy;
+              /   | Jen Roesch
 
         .col-sm-7.col-sm-offset-5.col-md-2.col-md-offset-0
           .intro-social
