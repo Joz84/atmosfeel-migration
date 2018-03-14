@@ -11,19 +11,21 @@ h1
       - if @experience_opuses.length > 0
         .col-md-6
           h5.artist-detail-opuses-title
-            = t('front.menu.opuses_experience')
+            / = t('front.menu.experience')
+            = "Œuvres sélectionnées par AtmosFeel"
           ul.list-unstyled.artist-detail-opuses-list
             - @experience_opuses.each do |opus|
               li
-                a href=opus_path(opus) 
+                a href=opus_path(opus)
                   = opus.title
 
       - if @marketplace_opuses.length > 0
         .col-md-6
           h5.artist-detail-opuses-title
-            = t('front.menu.opuses_marketplace')
+            / = t('front.menu.marketplace')
+            = "Œuvres auto-publiées par des indépendants"
           ul.list-unstyled.artist-detail-opuses-list
             - @marketplace_opuses.each do |opus|
               li
-                a href=opus_path(opus) 
+                a href=opus_path(opus)
                   = opus.title

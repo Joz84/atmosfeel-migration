@@ -100,10 +100,12 @@ html[lang="en"]
               ul.dropdown-menu
                 li
                   a href=front_experience_path
-                    = t('front.menu.opuses_experience')
+                    / = t('front.menu.experience')
+                    = "Œuvres sélectionnées par AtmosFeel"
                 li
                   a href=front_marketplace_path
-                    = t('front.menu.opuses_marketplace')
+                    / = t('front.menu.marketplace')
+                    = "Œuvres auto-publiées par des indépendants"
               = link_to 'Les artistes', front_authors_path
               = link_to 'Comment ça marche', front_ccm_path
               = link_to "Je m'abonne", front_tarifs_path
@@ -188,9 +190,11 @@ html[lang="en"]
           .container
             // = link_to "Les œuvres", front_catalog_path
             a href=front_experience_path
-              = t('front.menu.opuses_experience')
+              / = t('front.menu.experience')
+              = "Œuvres sélectionnées par AtmosFeel"
             a href=front_marketplace_path
-              = t('front.menu.opuses_marketplace')
+              / = t('front.menu.marketplace')
+              = "Œuvres auto-publiées par des indépendants"
             = link_to 'Les artistes', front_authors_path
             = link_to 'Comment ça marche', front_ccm_path
             = link_to "Je m'abonne", front_tarifs_path
